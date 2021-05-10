@@ -16,6 +16,7 @@ export class AppComponent implements OnInit {
   profileJson;
   title = 'OMTIAMT';
   searchText;
+  classApplied;
   url = GlobalConstants.apiURL + 'client';
   users = [
     { id: 11, name: 'Mr. Nice', country: 'India' },
@@ -32,11 +33,25 @@ export class AppComponent implements OnInit {
   private postData: {};
   constructor(@Inject(DOCUMENT) public document: Document, public auth: AuthService, private http: HttpClient) {}
   ngOnInit(): void {
-    const header = document.querySelector('nav');
+    const header = document.querySelector('header');
     const sectionOne = document.querySelector('.wrapper');
-
-    header.classList.add('nav-noscroll');
-    header.classList.remove('.navigation');
+    let classApplied = false;
+    // header.classList.add('nav-noscroll');
+    // header.classList.remove('.navigation');
+    // header.classList.add('.menu-btn');
+    // header.classList.add('navbar-demo');
+    // header.classList.add('open-nav');
+    // tslint:disable-next-line:typedef
+    const btn = document.querySelector('button').onclick = function() {
+        if (classApplied === false) {
+          header.classList.add('open-nav');
+          classApplied = true;
+        }
+        else {
+          header.classList.remove('open-nav');
+          classApplied = false;
+        }
+      };
     // tslint:disable-next-line:triple-equals
     // if (this.auth != null) {
     //   this.auth.user$.subscribe((profile) => {
@@ -53,9 +68,6 @@ export class AppComponent implements OnInit {
     //     }
     //   });
     // }
-
-
-
   }
 }
 

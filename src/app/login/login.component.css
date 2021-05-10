@@ -18,6 +18,7 @@ html,body{
   background: #fff;
   border-radius: 15px;
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  z-index: 900;
 }
 .wrapper .title{
   font-size: 35px;
@@ -106,6 +107,7 @@ form .field input[type="submit"]{
   cursor: pointer;
   background-image: linear-gradient(90deg,#f4633a,#c800a1,#0033a0);
   transition: all 0.3s ease;
+
 }
 form .field input[type="submit"]:active{
   transform: scale(0.95);

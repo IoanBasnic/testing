@@ -26,11 +26,9 @@ export class MyprofileComponent implements OnInit {
 
   // @ts-ignore
   ngOnInit(): void {
-    const header = document.querySelector('nav');
-    const sectionOne = document.querySelector('.wrapper');
+    const header = document.querySelector('button');
 
-    header.classList.add('nav-noscroll');
-    header.classList.remove('.navigation');
+    header.classList.add('menu-btn-black');
 
     this.http.get(this.url, {responseType: 'json'}).subscribe(responseData => {
       this.itemList = responseData;

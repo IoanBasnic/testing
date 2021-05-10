@@ -1,7 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 * {
-  font-family: ProximaNovaExtrabold,Open Sans,sans-serif;
-
+  font-family: 'Montserrat', sans-serif;
 }
 body { margin: 0; }
 html {
@@ -73,22 +72,22 @@ div {
   display: block;
 }
 
-.navigation-bar-inside {
-  display: -webkit-flex;
-  display: -moz-box;
-  display: flex;
-}
+/*.navigation-bar-inside {*/
+/*  display: -webkit-flex;*/
+/*  display: -moz-box;*/
+/*  display: flex;*/
+/*}*/
 
-.navigation-bar-inside {
-  -webkit-justify-content: space-between;
-  -moz-box-pack: justify;
-  justify-content: space-between;
-  -webkit-align-items: center;
-  -moz-box-align: center;
-  align-items: center;
-  height: 100%;
-  width: 100%;
-}
+/*.navigation-bar-inside {*/
+/*  -webkit-justify-content: space-between;*/
+/*  -moz-box-pack: justify;*/
+/*  justify-content: space-between;*/
+/*  -webkit-align-items: center;*/
+/*  -moz-box-align: center;*/
+/*  align-items: center;*/
+/*  height: 100%;*/
+/*  width: 100%;*/
+/*}*/
 
 
 
@@ -103,7 +102,7 @@ div {
 .itemsList_a::after {
   content: '';
   position: absolute;
-  width: 75%;
+  width: 100%;
   transform: scaleX(0);
   height: 0.15em;
   bottom: 0;
@@ -119,6 +118,111 @@ div {
   transform-origin: bottom left;
 }
 
+
+.navbar-demo {
+  display: table;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.navbar-demo .nav-bar ul li {
+  display: block;
+}
+
+.navbar-demo .nav-bar ul {
+  padding: 0;
+  display: table;
+  text-align: center;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-demo .nav-bar ul li a {
+  font-size: 18px;
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  color: #000;
+  padding: 18px;
+  text-transform: uppercase;
+}
+
+.nav-bar {
+  text-align: center;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  align-items: center;
+  position: relative;
+}
+.navbar-demo button.menu-btn {
+  display:none;
+}
+
+
+
+
+
+
+
+@media only screen and (min-width: 1px){
+  .navbar-demo  button.menu-btn {
+    cursor: pointer;
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-color: unset;
+    border: 0;
+    font-size: 26px;
+    display:block;
+    padding: 23px;
+    color: #fff;
+    outline: none;
+    z-index: 999;
+  }
+
+  .navbar-demo  button.menu-btn-black {
+
+    color: black !important;
+
+  }
+
+  .navbar-demo{
+    position: fixed;
+    z-index: 999;
+  }
+  .navbar-demo .nav-bar {
+    left: -2000px;
+    background-color: #000000d9;
+    transition: 1s;
+    height: 100%;
+    width: 0;
+  }
+
+  .navbar-demo.open-nav  .nav-bar{
+    left: 0;
+    width: 100%;
+    transition: left 0.5s;
+    height: 100%;
+    z-index: 999;
+
+  }
+
+  .navbar-demo .nav-bar ul li a {
+    display: block;
+    color: #fff;
+  }
+  .navbar-demo.open-nav button.menu-btn i:before {
+    content: '\f00d ';
+  }
+}
+/* */
 .footer_desk {
   position:relative;
   bottom:0;

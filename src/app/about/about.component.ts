@@ -10,13 +10,8 @@ export class AboutComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    const header = document.querySelector('nav');
-    const sectionOne = document.querySelector('.wrapper');
-
-    header.classList.add('nav-noscroll');
-    header.classList.remove('.navigation');
-
-
+    const header = document.querySelector('button');
+    header.classList.add('menu-btn-black');
   }
 
 }

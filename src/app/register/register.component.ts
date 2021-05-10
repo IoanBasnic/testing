@@ -34,10 +34,10 @@ export class RegisterComponent implements OnInit {
 
 
   ngOnInit(): void {
-    const header = document.querySelector('nav');
+    const header = document.querySelector('button');
     const sectionOne = document.querySelector('.wrapper');
 
-    header.classList.add('nav-noscroll');
+    header.classList.add('menu-btn-black');
     header.classList.remove('.navigation');
     this.myForm = this.fb.group({username: '', email: '', password: ''});
     this.myForm.valueChanges.subscribe(console.log);

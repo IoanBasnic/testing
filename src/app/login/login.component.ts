@@ -25,11 +25,10 @@ export class LoginComponent implements OnInit {
   profileJson;
 
   ngOnInit(): void {
-    const header = document.querySelector('nav');
+    const header = document.querySelector('button');
     const sectionOne = document.querySelector('.wrapper');
 
-    header.classList.add('nav-noscroll');
-    header.classList.remove('.navigation');
+    header.classList.add('menu-btn-black');
 
     this.myForm = this.fb.group({username: '', password: ''});
     this.myForm.valueChanges.subscribe(console.log);

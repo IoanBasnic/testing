@@ -16,7 +16,16 @@ export class HomeComponent implements OnInit {
   constructor( public auth: AuthService, private http: HttpClient) { }
 
   ngOnInit(): void {
-    const header = document.querySelector('nav');
+
+    const text = document.getElementById('text');
+    let shadow = '';
+    for (let i = 0; i < 10; i++)
+    {
+      shadow += (shadow ? ',' : '') + -i * 1 + 'px ' + i * 1 + 'px 0 #d9d9d9';
+    }
+    text.style.textShadow = shadow;
+
+    const header = document.querySelector('button');
     const items = document.querySelector('.itemsList_a');
     const sectionOne = document.querySelector('.wrapper');
 
@@ -32,10 +41,10 @@ export class HomeComponent implements OnInit {
     const sectionOneObserver = new IntersectionObserver(function(entries, sectionOneObserver) {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          header.classList.add('nav-scroll');
+          header.classList.add('menu-btn-black');
         }
         else {
-          header.classList.remove('nav-scroll');
+          header.classList.remove('menu-btn-black');
         }
       });
     }, sectionOneOptions);
