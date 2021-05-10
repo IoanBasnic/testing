@@ -29,6 +29,7 @@
     "@auth0/auth0-angular": "^1.4.1",
     "@fortawesome/fontawesome-free": "^5.15.3",
     "@types/simple-icons": "^4.14.0",
+    "express": "^4.17.1",
     "ng2-search-filter": "^0.5.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
