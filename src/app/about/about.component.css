@@ -1,0 +1,28 @@
+.bef-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content:center; align-items:center;
+}
+
+.wrapper{
+  width: 1600px;
+  background: #ffffff;
+  border-radius: 25px;
+  margin-top: 5%;
+  overflow:hidden;
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+.row {
+  display: flex;
+
+}
+
+/* Create two equal columns that sits next to each other */
+.column {
+  align-content: center;
+  text-align: center;
+  flex: 50%;
+  padding: 10px;
+  height: 300px; /* Should be removed. Only for demonstration */
+}

@@ -1,0 +1,76 @@
+
+
+<nav id='navbar' class="navigation">
+  <div class="navigation-bar">
+    <div class="navigation-bar-inside">
+      <ul class="itemList">
+<!--        <div class="homeBtn"> <a target="_self" class="itemsList_a" routerLink="/">Home</a></div>-->
+<!--        <a target="_self" class="itemsList_a" routerLink="/login" *ngIf="auth.isAuthenticated$">Log in</a>-->
+<!--        <a target="_self" class="itemsList_a" routerLink="/register" *ngIf="auth.isAuthenticated$">Register</a>-->
+<!--        <a target="_self" class="itemsList_a" routerLink="/about" *ngIf="auth.isAuthenticated$">About project</a>-->
+<!--        <a target="_self" class="itemsList_a" routerLink="/profile" *ngIf="auth.isAuthenticated$">My profile</a>-->
+        <ng-container *ngIf="auth.isAuthenticated$ | async; else loggedOut">
+          <a target="_self" class="itemsList_a" routerLink="/addproduct">Add a product</a>
+          <a target="_self" class="itemsList_a" routerLink="/products">Market</a>
+          <a target="_self" class="itemsList_a" routerLink="/profile">My profile</a>
+          <a target="_self" class="itemsList_a" href="#" (click)="auth.logout({ returnTo: 'http://localhost:4200' })">Log out</a>
+        </ng-container>
+<!--        <a target="_self" class="itemsList_a" href="#" (click)="auth.logout({ returnTo: 'http://localhost:4200/' })" *ngIf="auth.isAuthenticated$">Log out</a>-->
+        <ng-template #loggedOut>
+<!--          <div class="homeBtn"> <a target="_self" class="itemsList_a" routerLink="/">Home</a></div>-->
+          <a target="_self" class="itemsList_a" routerLink="/login">Sign in</a>
+          <a target="_self" class="itemsList_a" routerLink="/register">Sign up</a>
+          <a target="_self" class="itemsList_a" routerLink="/about">About project</a>
+        </ng-template>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="bodyContent">
+  <router-outlet></router-outlet>
+<!--  <div ng-app="sample" >-->
+<!--    <div class="sample ten">-->
+<!--      <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Start searching">-->
+<!--      <button type="submit" class="btn btn-search">-->
+<!--        <i class="fa fa-search"></i>-->
+<!--      </button>-->
+<!--      <button type="reset" class="btn btn-reset fa fa-times"></button>-->
+<!--    </div>-->
+<!--    <br>-->
+<!--    <table class="table table-striped">-->
+<!--      <thead>-->
+<!--      <tr>-->
+<!--        <th>Id</th>-->
+<!--        <th>Hero Name</th>-->
+<!--        <th>Country</th>-->
+<!--      </tr>-->
+<!--      </thead>-->
+<!--      <tbody>-->
+<!--      <tr *ngFor="let user of users | filter:searchText">-->
+<!--        <td>{{user.id}}</td>-->
+<!--        <td>{{user.name}}</td>-->
+<!--        <td>{{user.country}}</td>-->
+<!--      </tr>-->
+<!--      </tbody>-->
+<!--    </table>-->
+<!--  </div>-->
+</div>
+
+<footer class="footer_desk">
+
+  <div class="footerContent">
+    <div class="footerContent-down">
+      <div class="footContent">
+
+        <ul class="itemsList">
+          <i class="fa fa-github" style="font-size:60px;color:white;"></i>
+          <a target="_self" class="foot-a" href="https://github.com/IoanBasnic/One-man-s-trash-is-another-man-s-treasure">
+            Project github
+          </a>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+

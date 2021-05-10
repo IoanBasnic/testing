@@ -1,0 +1,32 @@
+<div class="bef-wrapper">
+  <div class="wrapper">
+
+    <div class="row">
+      <div class="column">
+        <form [formGroup]="myForm" method="post" enctype="multipart/form-data">
+              <div class="field">
+                <input type="file" formControlName="productImage" accept='.jpg' required>
+                <label>Product image</label>
+              </div>
+          <div class="field">
+            <input type="text" formControlName="productName" required>
+            <label>Product name</label>
+          </div>
+          <div class="field">
+            <input type="text" formControlName="productDescription" required>
+            <label>Product Description</label>
+          </div>
+          <div class="field">
+            <input type="text" formControlName="productPrice" required>
+            <label>Product price</label>
+          </div>
+          <div class="field">
+                  <input type="submit" value="Add product" (click)="addProduct()">
+
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,91 @@
+input {
+  border: 1px solid #ccc;
+  font-size: 12px;
+  height: 30px;
+  padding: 4px 8px;
+  position: absolute;
+  width: 50%;
+}
+input:focus {
+  outline: none;
+}
+
+button {
+  text-align: center;
+}
+button:focus {
+  outline: none;
+}
+button.btn-search, button.btn-reset {
+  background: #568683;
+  border: none;
+  height: 30px;
+  font-size: 12px;
+  padding: 4px;
+  position: absolute;
+  width: 30px;
+}
+
+.sample {
+  float: left;
+  height: 50px;
+  margin: 0 8%;
+  position: relative;
+  width: 34%;
+}
+.sample.ten input {
+  border-radius: 15px;
+  transition: all .6s ease-in-out .3s;
+  width: 120px;
+}
+.sample.ten input:focus {
+  transition-delay: 0;
+  width: 200px;
+}
+.sample.ten input:focus ~ button {
+  transform: rotateZ(360deg);
+}
+.sample.ten input:focus ~ button.btn-search {
+  background: #568683;
+  color: #fff;
+  left: 172px;
+  transition-delay: 0;
+}
+.sample.ten input:focus ~ button.btn-reset {
+  left: 202px;
+  transition-delay: .3s;
+}
+.sample.ten button {
+  transition: all .6s ease-in-out;
+}
+.sample.ten button.btn-search {
+  background: #ccc;
+  border-radius: 50%;
+  height: 26px;
+  left: 92px;
+  top: 2px;
+  transition-delay: .3s;
+  width: 26px;
+}
+.sample.ten button.btn-reset {
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  font-size: 10px;
+  height: 20px;
+  left: 92px;
+  line-height: 20px;
+  padding: 0;
+  top: 5px;
+  width: 20px;
+  z-index: -1;
+}
+
+html,
+body {
+  font-size: 12px;
+}
+
+* {
+  box-sizing: border-box;
+}

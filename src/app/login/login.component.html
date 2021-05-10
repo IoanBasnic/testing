@@ -1,0 +1,33 @@
+<div class="bef-wrapper">
+<div class="wrapper">
+  <div class="title">
+    Login</div>
+  <form [formGroup]="myForm">
+    <img src="https://i.ibb.co/MVbmDmT/auth0.png" alt="auth0" border="0">
+<!--    <div class="field">-->
+<!--      <input type="text" formControlName="username" required>-->
+<!--      <label>Email Address</label>-->
+<!--    </div>-->
+<!--    <div class="field">-->
+<!--      <input type="password" formControlName="password" required>-->
+<!--      <label>Password</label>-->
+<!--    </div>-->
+<!--    <div class="content">-->
+<!--      <div class="checkbox">-->
+<!--        <input type="checkbox" id="remember-me">-->
+<!--        <label for="remember-me">Remember me</label>-->
+<!--      </div>-->
+<!--      <div class="pass-link">-->
+<!--        <a href="#">Forgot password?</a></div>-->
+<!--    </div>-->
+    <div class="field">
+<!--      <input type="submit" value="Log in" (click)="loginClient()">-->
+      <input type="submit" value="Log in with Auth0" (click)="auth.loginWithRedirect()">
+      </div>
+<!--    <div class="signup">-->
+<!--      <span>Not a member? </span>-->
+<!--      <div class="signup-link"><a href="/register">Sign-up now!</a></div>-->
+<!--    </div>-->
+  </form>
+</div>
+</div>

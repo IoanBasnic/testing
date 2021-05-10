@@ -1,0 +1,52 @@
+<div class="bef-wrapper">
+  <div class="wrapper">
+
+    <div class="row">
+      <div class="column">
+        <h2>Product image</h2>
+        <img src="{{product.image}}">
+      </div>
+      <div class="column" >
+        <h2>Product title</h2>
+        <p>{{product.title}}</p>
+        <h2>Product description</h2>
+        <p>{{product.description}}</p>
+        <h2>Where I want to negotiate:</h2>
+        <agm-map [latitude]="client.lat" [longitude]="client.lng">
+          <agm-marker [latitude]="client.lat" [longitude]="client.lng" ></agm-marker>
+        </agm-map>
+        <h2>Product price and method of payment</h2>
+        <p>Price: {{product.price}} Lei in {{client.paymentMethod}}</p>
+
+      </div>
+
+    </div>
+
+    <div class="row">
+      <div class="column" >
+        <h2>About client</h2>
+        <p>Client's name: {{client.name}}<br>Client's phone number: {{client.phoneNumber}}</p>
+
+      </div>
+
+      <div class="column" id="msg">
+      </div>
+    </div>
+
+    <h2>ProductID: {{ProductID}}</h2>
+  </div>
+</div>
+
+
+<div id="idSendMessage" class="modal">
+  <form class="modal-content animate">
+    <div class="imgcontainer">
+      <span onclick="document.getElementById('idSendMessage').style.display='none'" class="close" title="Close Modal">&times;</span>
+    </div>
+    <div class="container">
+      <label ><b>Message</b></label>
+      <input type="text" placeholder="Message" name="msg" required>
+      <button class="btn" type="submit">Submit</button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,134 @@
+
+.grid-wrapper{
+  background-color: transparent !important;
+  --auto-grid-min-size: 16rem;
+  display: grid;
+  grid-gap: 5rem;
+  grid-template-columns: repeat(auto-fill, minmax(var(--auto-grid-min-size), 1fr));
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+
+}
+
+
+
+.main-container{
+  background-color: transparent !important;
+  margin: 0 auto;
+  max-width: 1170px;
+  padding:2rem 1rem;
+}
+
+
+.bef-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content:center; align-items:center;
+}
+
+.wrapper{
+  width: 1600px;
+  background: #ffffff;
+  border-radius: 25px;
+  margin-top: 5%;
+  overflow:hidden;
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+.row {
+  display: flex;
+
+}
+
+/* Create two equal columns that sits next to each other */
+.column {
+  flex: 50%;
+  margin-left: 5%;
+  padding: 10px;
+}
+
+input {
+  border: 1px solid #ccc;
+  font-size: 12px;
+  height: 20px;
+  padding: 4px 8px;
+  position: absolute;
+  width: 50%;
+}
+input:focus {
+  outline: none;
+}
+
+button {
+  text-align: center;
+}
+button:focus {
+  outline: none;
+}
+button.btn-search, button.btn-reset {
+  background: #1abc9c;
+  border: none;
+  height: 30px;
+  font-size: 12px;
+  padding: 4px;
+  margin-left: 5px;
+  position: absolute;
+  width: 20px;
+}
+
+
+.sample {
+  float: left;
+  height: 50px;
+  position: relative;
+  width: 34%;
+}
+.sample.ten input {
+  border-radius: 15px;
+  transition: all .6s ease-in-out .3s;
+  width: 120px;
+}
+.sample.ten input:focus {
+  transition-delay: 0;
+  width: 200px;
+}
+.sample.ten input:focus ~ button {
+  transform: rotateZ(360deg);
+}
+.sample.ten input:focus ~ button.btn-search {
+  background: #1abc9c;
+  color: #fff;
+  left: 172px;
+  transition-delay: 0;
+}
+.sample.ten input:focus ~ button.btn-reset {
+  left: 202px;
+  transition-delay: .3s;
+}
+.sample.ten button {
+  transition: all .6s ease-in-out;
+}
+.sample.ten button.btn-search {
+  background: #ccc;
+  border-radius: 50%;
+  height: 26px;
+  left: 92px;
+  top: 2px;
+  transition-delay: .3s;
+  width: 26px;
+}
+.sample.ten button.btn-reset {
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  font-size: 10px;
+  height: 20px;
+  left: 92px;
+  line-height: 20px;
+  padding: 0;
+  top: 5px;
+  width: 20px;
+  z-index: -1;
+}

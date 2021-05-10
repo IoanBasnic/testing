@@ -1,0 +1,57 @@
+
+<div class="bef-wrapper">
+  <div class="wrapper">
+
+    <div class="row">
+      <div class="column">
+        <h2>Search product</h2>
+          <div ng-app="sample" >
+            <div class="sample ten">
+              <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Search product">
+              <button type="submit" class="btn btn-search">
+                <i class="fa fa-search"></i>
+              </button>
+              <button type="reset" class="btn btn-reset fa fa-times"></button>
+            </div>
+          </div>
+<!--            <table class="table table-striped">-->
+<!--              <thead>-->
+<!--              <tr>-->
+<!--                <th>Id</th>-->
+<!--                <th>Hero Name</th>-->
+<!--                <th>Country</th>-->
+<!--              </tr>-->
+<!--              </thead>-->
+<!--              <tbody>-->
+<!--              <tr *ngFor="let user of itemList | filter:searchText">-->
+<!--                <td>{{user.id}}</td>-->
+<!--                <td>{{user.name}}</td>-->
+<!--                <td>{{user.country}}</td>-->
+<!--              </tr>-->
+<!--              </tbody>-->
+<!--            </table>-->
+      </div>
+      <div class="column" >
+        <h2>Search by category</h2>
+        <div>
+        <select id="selectbox2">
+          <option value="pt_1">Cristiano Ronaldo</option>
+          <option value="en_2">Lionel Messi </option>
+          <option value="es_3" disabled>Neymar Jr. (Disabled)</option>
+          <option value="ch_4">Ronaldinho</option>
+          <option value="5">Luis Figo</option>
+        </select>
+      </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<div class="bef-wrapper">
+  <div class="wrapper">
+    <div class="main-container"> <div id="dynamicContent" class="grid-wrapper" ></div> </div>
+  </div>
+</div>
+
