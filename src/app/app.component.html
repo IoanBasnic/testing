@@ -1,46 +1,105 @@
+<div class="navigation">
+  <input type="checkbox" id="navi-toggle" class="navigation__checkbox" />
 
+  <label for="navi-toggle" class="navigation__button">
+				<span class="navigation__icon">
+					<span class="navigation__icon-span">&nbsp;</span>
+					<span class="navigation__icon-span">&nbsp;</span>
+					<span class="navigation__icon-span">&nbsp;</span>
+					<span class="navigation__icon-span">&nbsp;</span>
+					<span class="navigation__icon-span">&nbsp;</span>
+					<span class="navigation__icon-span">&nbsp;</span>
+				</span>
+  </label>
 
-<header id='navbar' class="navbar-demo">
-  <div class="nav-bar">
-      <ul class="">
-<!--&lt;!&ndash;        <div class="homeBtn"> <a target="_self" class="itemsList_a" routerLink="/">Home</a></div>&ndash;&gt;-->
-<!--&lt;!&ndash;        <a target="_self" class="itemsList_a" routerLink="/login" *ngIf="auth.isAuthenticated$">Log in</a>&ndash;&gt;-->
-<!--&lt;!&ndash;        <a target="_self" class="itemsList_a" routerLink="/register" *ngIf="auth.isAuthenticated$">Register</a>&ndash;&gt;-->
-<!--&lt;!&ndash;        <a target="_self" class="itemsList_a" routerLink="/about" *ngIf="auth.isAuthenticated$">About project</a>&ndash;&gt;-->
-<!--&lt;!&ndash;        <a target="_self" class="itemsList_a" routerLink="/profile" *ngIf="auth.isAuthenticated$">My profile</a>&ndash;&gt;-->
-<!--        <ng-container *ngIf="auth.isAuthenticated$ | async; else loggedOut">-->
-<!--          <a target="_self" class="itemsList_a" routerLink="/addproduct">Add a product</a>-->
-<!--          <a target="_self" class="itemsList_a" routerLink="/products">Market</a>-->
-<!--          <a target="_self" class="itemsList_a" routerLink="/profile">My profile</a>-->
-<!--          <a target="_self" class="itemsList_a" href="#" (click)="auth.logout({ returnTo: 'http://localhost:4200' })">Log out</a>-->
-<!--        </ng-container>-->
-<!--&lt;!&ndash;        <a target="_self" class="itemsList_a" href="#" (click)="auth.logout({ returnTo: 'http://localhost:4200/' })" *ngIf="auth.isAuthenticated$">Log out</a>&ndash;&gt;-->
-<!--        <ng-template #loggedOut>-->
-<!--&lt;!&ndash;          <div class="homeBtn"> <a target="_self" class="itemsList_a" routerLink="/">Home</a></div>&ndash;&gt;-->
-<!--          <a target="_self" class="itemsList_a" routerLink="/login">Sign in</a>-->
-<!--          <a target="_self" class="itemsList_a" routerLink="/register">Sign up</a>-->
-<!--          <a target="_self" class="itemsList_a" routerLink="/about">About project</a>-->
-<!--        </ng-template>-->
+  <div class="navigation__background">&nbsp;</div>
 
-                <ng-container *ngIf="auth.isAuthenticated$ | async; else loggedOut">
-                  <li>
-                  <a class="itemsList_a" routerLink="/addproduct">Add a product</a>
-                  <a class="itemsList_a" routerLink="/products">Market</a>
-                  <a class="itemsList_a" routerLink="/profile">My profile</a>
-                  <a class="itemsList_a" href="#" (click)="auth.logout({ returnTo: 'http://localhost:4200' })">Log out</a>
-                  </li>
-                </ng-container>
-                <ng-template #loggedOut>
-                  <li>
-                  <a class="itemsList_a" routerLink="/login">Sign in</a>
-                  <a class="itemsList_a" routerLink="/register">Sign up</a>
-                  <a class="itemsList_a" routerLink="/about">About project</a>
-                  </li>
-                </ng-template>
-      </ul>
-    </div>
-  <button type="" id="idMenuBurger" class="menu-btn"><i class="fa fa-bars" aria-hidden="true"></i></button>
-</header>
+  <nav class="navigation__nav">
+    <ul class="navigation__list">
+      <ng-container *ngIf="auth.isAuthenticated$ | async; else loggedOut">
+        <li class="navigation__item"><a class="navigation__link" href="/addproduct">Add a product</a></li>
+        <li class="navigation__item"><a class="navigation__link" href="/products">Market</a></li>
+        <li class="navigation__item"> <a class="navigation__link" href="/profile">My profile</a></li>
+        <li class="navigation__item"> <a class="navigation__link" href="#" (click)="auth.logout({ returnTo: 'http://localhost:4200' })">Log out</a></li>
+      </ng-container>
+      <ng-template #loggedOut>
+        <li class="navigation__item"> <a class="navigation__link" href="/login">Sign in</a> </li>
+        <li class="navigation__item"> <a class="navigation__link" href="/register">Sign up</a> </li>
+        <li class="navigation__item"> <a class="navigation__link" href="/about">About project</a> </li>
+      </ng-template>
+    </ul>
+  </nav>
+</div>
+
+<!--<header>-->
+<!--<div class="container">-->
+<!--  <div class="section"></div>-->
+<!--  <div class="section"></div>-->
+
+<!--  <ul class="toggle active">-->
+<!--    <li></li>-->
+<!--    <li></li>-->
+<!--    <li></li>-->
+<!--  </ul>-->
+<!--  <div class="sidebar active">-->
+<!--    <img src="https://blog.codepen.io/wp-content/uploads/2012/06/Button-Fill-Black-Large.png">-->
+<!--    <ul class="menu">-->
+<!--      <ng-container *ngIf="auth.isAuthenticated$ | async; else loggedOut">-->
+<!--        <li><a class="itemsList_a" routerLink="/addproduct">Add a product</a></li>-->
+<!--        <li><a class="itemsList_a" routerLink="/products">Market</a></li>-->
+<!--        <li> <a class="itemsList_a" routerLink="/profile">My profile</a></li>-->
+<!--        <li> <a class="itemsList_a" href="#" (click)="auth.logout({ returnTo: 'http://localhost:4200' })">Log out</a></li>-->
+<!--      </ng-container>-->
+<!--      <ng-template #loggedOut>-->
+<!--        <li> <a class="itemsList_a" routerLink="/login">Sign in</a> </li>-->
+<!--        <li> <a class="itemsList_a" routerLink="/register">Sign up</a> </li>-->
+<!--        <li> <a class="itemsList_a" routerLink="/about">About project</a> </li>-->
+<!--      </ng-template>-->
+<!--    </ul>-->
+<!--  </div>-->
+<!--</div>-->
+<!--</header>-->
+<!--<header id='navbar' class="navbar-demo">-->
+<!--  <div class="nav-bar">-->
+<!--      <ul class="">-->
+<!--&lt;!&ndash;&lt;!&ndash;        <div class="homeBtn"> <a target="_self" class="itemsList_a" routerLink="/">Home</a></div>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;        <a target="_self" class="itemsList_a" routerLink="/login" *ngIf="auth.isAuthenticated$">Log in</a>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;        <a target="_self" class="itemsList_a" routerLink="/register" *ngIf="auth.isAuthenticated$">Register</a>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;        <a target="_self" class="itemsList_a" routerLink="/about" *ngIf="auth.isAuthenticated$">About project</a>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;        <a target="_self" class="itemsList_a" routerLink="/profile" *ngIf="auth.isAuthenticated$">My profile</a>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;        <ng-container *ngIf="auth.isAuthenticated$ | async; else loggedOut">&ndash;&gt;-->
+<!--&lt;!&ndash;          <a target="_self" class="itemsList_a" routerLink="/addproduct">Add a product</a>&ndash;&gt;-->
+<!--&lt;!&ndash;          <a target="_self" class="itemsList_a" routerLink="/products">Market</a>&ndash;&gt;-->
+<!--&lt;!&ndash;          <a target="_self" class="itemsList_a" routerLink="/profile">My profile</a>&ndash;&gt;-->
+<!--&lt;!&ndash;          <a target="_self" class="itemsList_a" href="#" (click)="auth.logout({ returnTo: 'http://localhost:4200' })">Log out</a>&ndash;&gt;-->
+<!--&lt;!&ndash;        </ng-container>&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;        <a target="_self" class="itemsList_a" href="#" (click)="auth.logout({ returnTo: 'http://localhost:4200/' })" *ngIf="auth.isAuthenticated$">Log out</a>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;        <ng-template #loggedOut>&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;          <div class="homeBtn"> <a target="_self" class="itemsList_a" routerLink="/">Home</a></div>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;          <a target="_self" class="itemsList_a" routerLink="/login">Sign in</a>&ndash;&gt;-->
+<!--&lt;!&ndash;          <a target="_self" class="itemsList_a" routerLink="/register">Sign up</a>&ndash;&gt;-->
+<!--&lt;!&ndash;          <a target="_self" class="itemsList_a" routerLink="/about">About project</a>&ndash;&gt;-->
+<!--&lt;!&ndash;        </ng-template>&ndash;&gt;-->
+
+<!--                <ng-container *ngIf="auth.isAuthenticated$ | async; else loggedOut">-->
+<!--                  <li>-->
+<!--                  <a class="itemsList_a" routerLink="/addproduct">Add a product</a>-->
+<!--                  <a class="itemsList_a" routerLink="/products">Market</a>-->
+<!--                  <a class="itemsList_a" routerLink="/profile">My profile</a>-->
+<!--                  <a class="itemsList_a" href="#" (click)="auth.logout({ returnTo: 'http://localhost:4200' })">Log out</a>-->
+<!--                  </li>-->
+<!--                </ng-container>-->
+<!--                <ng-template #loggedOut>-->
+<!--                  <li>-->
+<!--                  <a class="itemsList_a" routerLink="/login">Sign in</a>-->
+<!--                  <a class="itemsList_a" routerLink="/register">Sign up</a>-->
+<!--                  <a class="itemsList_a" routerLink="/about">About project</a>-->
+<!--                  </li>-->
+<!--                </ng-template>-->
+<!--      </ul>-->
+<!--    </div>-->
+<!--  <button type="" id="idMenuBurger" class="menu-btn"><i class="fa fa-bars" aria-hidden="true"></i></button>-->
+<!--</header>-->
 <div class="bodyContent">
   <router-outlet></router-outlet>
 <!--  <div ng-app="sample" >-->

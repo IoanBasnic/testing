@@ -34,21 +34,22 @@ export class AppComponent implements OnInit {
   constructor(@Inject(DOCUMENT) public document: Document, public auth: AuthService, private http: HttpClient) {}
   ngOnInit(): void {
     const header = document.querySelector('header');
-    const sectionOne = document.querySelector('.wrapper');
+    const sectionOne = document.querySelector('container');
     let classApplied = false;
     // header.classList.add('nav-noscroll');
     // header.classList.remove('.navigation');
     // header.classList.add('.menu-btn');
     // header.classList.add('navbar-demo');
     // header.classList.add('open-nav');
-    // tslint:disable-next-line:typedef
-    const btn = document.querySelector('button').onclick = function() {
+    const btn = document.querySelector('ul').onclick = function() {
         if (classApplied === false) {
-          header.classList.add('open-nav');
+          header.classList.add('active');
+          sectionOne.classList.add('active');
           classApplied = true;
         }
         else {
-          header.classList.remove('open-nav');
+          header.classList.remove('active');
+          sectionOne.classList.remove('active');
           classApplied = false;
         }
       };
