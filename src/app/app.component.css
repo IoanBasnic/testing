@@ -345,10 +345,10 @@ body {
 
   .navigation__button {
     position: fixed;
-    top: 3rem;
-    right: 3rem;
-    height: 4em ;
-    width: 4em ;
+    top: 2rem;
+    right: 2rem;
+    height: 3.5em ;
+    width: 3.5em ;
   }
   .navigation__icon-span {
     position: absolute;
@@ -360,10 +360,10 @@ body {
 
   .navigation__background {
     position: fixed;
-    top: 3.5rem;
-    right: 3.5rem;
-    width: 3rem;
-    height: 3rem;
+    top: 2.5rem;
+    right: 2.5rem;
+    width: 2rem;
+    height: 2rem;
     border-radius: 50%;
     background-image: radial-gradient(#f4633a, #c800a1);
     z-index: 10;
