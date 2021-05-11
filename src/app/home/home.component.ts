@@ -17,27 +17,27 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
 
-    const text = document.getElementById('text');
-    let shadow = '';
-    for (let i = 0; i < 7; i++)
-    {
-      shadow += (shadow ? ',' : '') + -i * 1 + 'px ' + i * 1 + 'px 0 #454545';
-    }
-    text.style.textShadow = shadow;
+    // const text = document.getElementById('text');
+    // let shadow = '';
+    // for (let i = 0; i < 7; i++)
+    // {
+    //   shadow += (shadow ? ',' : '') + -i * 1 + 'px ' + i * 1 + 'px 0 #454545';
+    // }
+    // text.style.textShadow = shadow;
 
     const header = document.querySelector('button');
     const items = document.querySelector('.itemsList_a');
     const sectionOne = document.querySelector('.wrapper');
 
     const sectionOneOptions = {};
-    header.classList.remove('nav-noscroll');
-    header.classList.add('.navigation');
+    // header.classList.remove('nav-noscroll');
+    // header.classList.add('.navigation');
 
-    if (sectionOne == null)
-    {
-      header.classList.add('nav-noscroll');
-      header.classList.remove('.navigation');
-    }
+    // if (sectionOne == null)
+    // {
+    //   header.classList.add('nav-noscroll');
+    //   // header.classList.remove('.navigation');
+    // }
     const sectionOneObserver = new IntersectionObserver(function(entries, sectionOneObserver) {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -57,7 +57,6 @@ export class HomeComponent implements OnInit {
         if (this.profileJson === null) {}
         else {
           this.postData = {
-            email: this.profileJson.email,
             userID: this.profileJson.sub
           };
           this.http.post(this.url, this.profileJson.sub).toPromise().then(data => {
