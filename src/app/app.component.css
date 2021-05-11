@@ -344,6 +344,9 @@ body {
 @media screen and (max-width: 900px){
 
   .navigation__button {
+    position: fixed;
+    top: 3rem;
+    right: 3rem;
     height: 4em ;
     width: 4em ;
   }
@@ -357,8 +360,8 @@ body {
 
   .navigation__background {
     position: fixed;
-    top: 6.5rem;
-    right: 6.5rem;
+    top: 3.5rem;
+    right: 3.5rem;
     width: 3rem;
     height: 3rem;
     border-radius: 50%;
