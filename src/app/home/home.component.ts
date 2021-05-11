@@ -19,9 +19,9 @@ export class HomeComponent implements OnInit {
 
     const text = document.getElementById('text');
     let shadow = '';
-    for (let i = 0; i < 5; i++)
+    for (let i = 0; i < 7; i++)
     {
-      shadow += (shadow ? ',' : '') + -i * 1 + 'px ' + i * 1 + 'px 0 #d9d9d9';
+      shadow += (shadow ? ',' : '') + -i * 1 + 'px ' + i * 1 + 'px 0 #454545';
     }
     text.style.textShadow = shadow;
 

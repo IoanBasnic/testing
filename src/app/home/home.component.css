@@ -119,7 +119,7 @@
   line-height: 80px;
   letter-spacing: 1.4px;
   margin-bottom: 30px;
-  color: #fff;
+  color: #ffffff;
 }
 
 .welcome .header-text p {
@@ -174,7 +174,7 @@
   position: relative;
   font-weight: 700;
   font-size: 5.5em;
-  color: #fff;
+  color: #454545;
   transform: rotate(-28deg) skew(25deg);
 }
 #text::before
