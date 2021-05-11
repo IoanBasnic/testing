@@ -52,8 +52,9 @@ export class HomeComponent implements OnInit {
     sectionOneObserver.observe(sectionOne);
 
     if (this.auth != null) {
-      this.auth.user$.subscribe((profile) => {
+      this.auth.getAccessTokenSilently().subscribe((profile) => {
         this.profileJson = JSON.parse(JSON.stringify(profile, null, 2));
+        console.log(this.profileJson);
         if (this.profileJson === null) {}
         else {
           this.postData = {
