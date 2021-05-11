@@ -57,10 +57,7 @@ export class HomeComponent implements OnInit {
         console.log(this.profileJson);
         if (this.profileJson === null) {}
         else {
-          this.postData = {
-            userID: this.profileJson.sub
-          };
-          this.http.post(this.url, this.profileJson.sub).toPromise().then(data => {
+          this.http.post(this.url, this.profileJson).toPromise().then(data => {
             console.log(data);
           });
         }
