@@ -259,3 +259,22 @@ img {
 }
 
 /**/
+#design1 {
+  margin-bottom: 5%;
+}
+
+@media screen and (max-width: 1000px){
+
+  #idCheckSize {
+    display: none;
+  }
+
+  #idCheckSize2 {
+    display: none;
+  }
+
+  #idCheckSize3 {
+    display: none;
+  }
+}
+

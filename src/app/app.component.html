@@ -23,6 +23,7 @@
         <li class="navigation__item"> <a class="navigation__link" href="#" (click)="auth.logout({ returnTo: 'http://localhost:4200' })">Log out</a></li>
       </ng-container>
       <ng-template #loggedOut>
+        <li class="navigation__item"><a class="navigation__link" href="/">Home</a></li>
         <li class="navigation__item"> <a class="navigation__link" href="/login">Sign in</a> </li>
         <li class="navigation__item"> <a class="navigation__link" href="/register">Sign up</a> </li>
         <li class="navigation__item"> <a class="navigation__link" href="/about">About project</a> </li>
