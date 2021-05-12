@@ -58,7 +58,7 @@
 
 <div id="idAddress" class="modal">
 
-  <form class="modal-content animate">
+  <form [formGroup]="myForm" class="modal-content animate">
     <div class="imgcontainer">
       <span onclick="document.getElementById('idAddress').style.display='none'" class="close" title="Close Modal">&times;</span>
     </div>
@@ -68,7 +68,7 @@
       <agm-map [latitude]="lat" [longitude]="lng" (mapClick)="selectLocation($event)">
         <agm-marker [latitude]="lat" [longitude]="lng" ></agm-marker>
       </agm-map>
-      <button class="btn" type="submit" >Edit address</button>
+      <button class="btn" type="submit" (click)="editAddress()" routerLink="/profile">Edit address</button>
 
     </div>
 
@@ -78,15 +78,15 @@
 
 <div id="idPhoneNumber" class="modal">
 
-  <form class="modal-content animate">
+  <form [formGroup]="myForm" (ngSubmit)="editPhoneNumber()" class="modal-content animate">
     <div class="imgcontainer">
       <span onclick="document.getElementById('idPhoneNumber').style.display='none'" class="close" title="Close Modal">&times;</span>
     </div>
 
     <div class="container">
       <label ><b>New Phone Number:</b></label>
-      <input type="text" placeholder="New phone number" name="uname" required>
-      <button class="btn" type="submit">Edit Phone Number</button>
+      <input type="text" formControlName="phoneNumber" placeholder="New phone number" name="phoneNumber" required>
+      <button class="btn" type="submit" (click)="editPhoneNumber()" routerLink="/profile">Edit Phone Number</button>
 
     </div>
 
@@ -96,21 +96,21 @@
 
 <div id="idPaymentMethod" class="modal">
 
-  <form class="modal-content animate">
+  <form [formGroup]="myForm" (ngSubmit)="editPayment()" class="modal-content animate">
     <div class="imgcontainer">
       <span onclick="document.getElementById('idPaymentMethod').style.display='none'" class="close" title="Close Modal">&times;</span>
     </div>
 
     <div class="container">
       <label ><b>Choose a new payment method:</b></label>
-      <select id="selectbox2">
-        <option value="pt_1">CASH</option>
-        <option value="en_2">CHECK</option>
-        <option value="es_3">BITCOIN</option>
-        <option value="ch_4">CREDIT</option>
-        <option value="5">DEBIT</option>
+      <select id="selectbox2" formControlName="paymentMethod" name="paymentMethod">
+        <option value="CASH">CASH</option>
+        <option value="CHECK">CHECK</option>
+        <option value="BITCOIN">BITCOIN</option>
+        <option value="CREDIT">CREDIT</option>
+        <option value="DEBIT">DEBIT</option>
       </select>
-      <button class="btn" type="submit">Edit Payment method</button>
+      <button class="btn" type="submit"  routerLink="/profile">Edit Payment method</button>
 
     </div>
 

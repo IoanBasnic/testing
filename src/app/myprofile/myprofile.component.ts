@@ -3,6 +3,7 @@ import { AuthService } from '@auth0/auth0-angular';
 import {AgmCoreModule} from '@agm/core';
 import {HttpClient} from '@angular/common/http';
 import {GlobalConstants} from '../../common/global-constants';
+import {FormBuilder} from "@angular/forms";
 @Component({
   selector: 'app-user-profile',
   templateUrl: './myprofile.component.html',
@@ -20,14 +21,19 @@ export class MyprofileComponent implements OnInit {
 
   url = GlobalConstants.apiURL + 'product';
   urlDelete = GlobalConstants.apiURL + 'product/delete';
-  itemList;
+  urlEditAddress = GlobalConstants.apiURL + 'product/editaddress';
+  urlEditPhoneNumber = GlobalConstants.apiURL + 'product/editphonenumber';
+  urlEditPayment = GlobalConstants.apiURL + 'product/editpayment';
+  itemList; formData = {};
   private profileJson: any;
-  constructor(public auth: AuthService, private http: HttpClient) { }
+  constructor(public auth: AuthService, private fb: FormBuilder, private http: HttpClient) {
+  }
 
   // @ts-ignore
+  myForm: any;
   ngOnInit(): void {
     const header = document.querySelector('button');
-
+    this.myForm = this.fb.group({address: '', phoneNumber: '', paymentMethod: ''});
     header.classList.add('menu-btn-black');
 
     this.http.get(this.url, {responseType: 'json'}).subscribe(responseData => {
@@ -105,6 +111,42 @@ export class MyprofileComponent implements OnInit {
 
         document.getElementById('dynamicContent').appendChild(node);
       }
+    });
+  }
+
+  editPayment(): void {
+    this.auth.getAccessTokenSilently().subscribe(data => {
+    this.formData = {
+      clientToken: data,
+      additionalInfo: {
+        paymentMethod: this.myForm.getRawValue().paymentMethod,
+      }
+    };
+    this.http.post(this.urlEditPayment, this.formData).toPromise().then(datas => {console.log(datas); });
+    });
+  }
+
+  editPhoneNumber(): void {
+    this.auth.getAccessTokenSilently().subscribe(data => {
+      this.formData = {
+        clientToken: data,
+      additionalInfo: {
+        phone_number: this.myForm.getRawValue().phoneNumber,
+      }
+    };
+      this.http.post(this.urlEditPhoneNumber, this.formData).toPromise().then(datas => {console.log(datas); });
+    });
+  }
+
+  editAddress(): void {
+    this.auth.getAccessTokenSilently().subscribe(data => {
+      this.formData = {
+        clientToken: data,
+        additionalInfo: {
+          address: this.myForm.getRawValue().address,
+        }
+      };
+      this.http.post(this.urlEditAddress, this.formData).toPromise().then(datas => {console.log(datas); });
     });
   }
 }

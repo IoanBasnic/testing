@@ -24,14 +24,14 @@ export class AddproductComponent implements OnInit {
     header.classList.add('nav-noscroll');
     header.classList.remove('.navigation');
     this.myForm = this.fb.group({productImage: '', productName: '', productDescription: '', productPrice: ''});
-    this.auth.user$.subscribe((profile) => {
+    this.auth.getAccessTokenSilently().subscribe((profile) => {
       this.profileJson = JSON.parse(JSON.stringify(profile, null, 2));
     });
   }
 
   addProduct(): void {
     this.postData = {
-      clientId: this.profileJson.sub,
+      clientToken: this.profileJson,
       image: this.myForm.value.productImage,
       title: this.myForm.getRawValue().productName,
       description: this.myForm.getRawValue().productDescription,
