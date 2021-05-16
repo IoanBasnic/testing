@@ -21,9 +21,9 @@ export class MyprofileComponent implements OnInit {
 
   url = GlobalConstants.apiURL + 'product';
   urlDelete = GlobalConstants.apiURL + 'product/delete';
-  urlEditAddress = GlobalConstants.apiURL + 'product/editaddress';
-  urlEditPhoneNumber = GlobalConstants.apiURL + 'product/editphonenumber';
-  urlEditPayment = GlobalConstants.apiURL + 'product/editpayment';
+  urlEditAddress = GlobalConstants.apiURL + 'client';
+  urlEditPhoneNumber = GlobalConstants.apiURL + 'client';
+  urlEditPayment = GlobalConstants.apiURL + 'client';
   itemList; formData = {};
   private profileJson: any;
   constructor(public auth: AuthService, private fb: FormBuilder, private http: HttpClient) {
@@ -122,7 +122,7 @@ export class MyprofileComponent implements OnInit {
         paymentMethod: this.myForm.getRawValue().paymentMethod,
       }
     };
-    this.http.post(this.urlEditPayment, this.formData).toPromise().then(datas => {console.log(datas); });
+    this.http.put(this.urlEditPayment, this.formData).toPromise().then(datas => {console.log(datas); });
     });
   }
 
@@ -134,7 +134,7 @@ export class MyprofileComponent implements OnInit {
         phone_number: this.myForm.getRawValue().phoneNumber,
       }
     };
-      this.http.post(this.urlEditPhoneNumber, this.formData).toPromise().then(datas => {console.log(datas); });
+      this.http.put(this.urlEditPhoneNumber, this.formData).toPromise().then(datas => {console.log(datas); });
     });
   }
 
@@ -146,7 +146,7 @@ export class MyprofileComponent implements OnInit {
           address: this.myForm.getRawValue().address,
         }
       };
-      this.http.post(this.urlEditAddress, this.formData).toPromise().then(datas => {console.log(datas); });
+      this.http.put(this.urlEditAddress, this.formData).toPromise().then(datas => {console.log(datas); });
     });
   }
 }

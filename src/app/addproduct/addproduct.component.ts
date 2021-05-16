@@ -32,10 +32,12 @@ export class AddproductComponent implements OnInit {
   addProduct(): void {
     this.postData = {
       clientToken: this.profileJson,
+      product: {
       image: this.myForm.value.productImage,
       title: this.myForm.getRawValue().productName,
       description: this.myForm.getRawValue().productDescription,
       askingPrice: this.myForm.getRawValue().productPrice
+      }
     };
     console.log(this.postData);
     this.http.post(this.url, this.postData).toPromise().then(data => {console.log(data); });
