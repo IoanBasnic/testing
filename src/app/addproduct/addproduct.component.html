@@ -1,3 +1,4 @@
+
 <div class="bef-wrapper">
   <div class="wrapper">
 
@@ -5,7 +6,7 @@
       <div class="column">
         <form [formGroup]="myForm" method="post" enctype="multipart/form-data">
               <div class="field">
-                <input type="file" formControlName="productImage" accept='.jpg' required>
+                <input type="file" formControlName="productImage" accept='.jpg' (change)="onSelectFile($event)" required>
                 <label>Product image</label>
               </div>
           <div class="field">
@@ -21,11 +22,12 @@
             <label>Product price</label>
           </div>
           <div class="field">
-                  <input type="submit" value="Add product" (click)="addProduct()">
-
+                  <input type="submit" value="Add product" (click)="performUpload()">
           </div>
-
         </form>
+        <div *ngIf="imageSrc">
+          <img src="{{imageSrc}}">
+        </div>
       </div>
     </div>
   </div>

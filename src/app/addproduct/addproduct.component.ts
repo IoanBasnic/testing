@@ -3,6 +3,7 @@ import {GlobalConstants} from '../../common/global-constants';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
 import {AuthService} from '@auth0/auth0-angular';
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-addproduct',
@@ -13,6 +14,9 @@ export class AddproductComponent implements OnInit {
   myForm: FormGroup;
   postData = {};
   profileJson;
+  public formData = new FormData();
+  public selectedFile: File = null;
+  public imageSrc: string;
   url = GlobalConstants.apiURL + 'product/add';
   constructor(public auth: AuthService, private fb: FormBuilder, private http: HttpClient) {
   }
@@ -27,6 +31,36 @@ export class AddproductComponent implements OnInit {
     this.auth.getAccessTokenSilently().subscribe((profile) => {
       this.profileJson = JSON.parse(JSON.stringify(profile, null, 2));
     });
+  }
+
+  public uploadImage(formData: FormData): Observable<any> {
+    const file = formData.get('file') as File;
+    const url = this.url + `/upload?file=${file.name}`;
+    this.postData = {
+      clientToken: this.profileJson,
+      product: {
+        image: file,
+        title: this.myForm.getRawValue().productName,
+        description: this.myForm.getRawValue().productDescription,
+        askingPrice: this.myForm.getRawValue().productPrice
+      }
+    };
+    console.log(this.postData);
+    this.http.post(this.url, this.postData).toPromise().then(data => {console.log(data); });
+    return this.http.post(url, formData , {responseType: 'text'});
+  }
+
+  onSelectFile(event): void {
+    this.selectedFile = event.target.files[event.target.files.length - 1] as File;
+  }
+
+  performUpload(): void {
+    this.formData.set('file', this.selectedFile, this.selectedFile.name);
+    this.uploadImage(this.formData).subscribe(
+      res => {
+        this.imageSrc = res;
+      }
+    );
   }
 
   addProduct(): void {
