@@ -43,8 +43,8 @@ export class ProductComponent implements OnInit {
   searchText: string;
 
   ngOnInit(): void {
-    const header = document.querySelector('button');
-    header.classList.add('menu-btn-black');
+    // const header = document.querySelector('button');
+    // header.classList.add('menu-btn-black');
 
   }
   createContent(): void {

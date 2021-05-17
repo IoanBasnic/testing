@@ -3,7 +3,7 @@ import {GlobalConstants} from '../../common/global-constants';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
 import {AuthService} from '@auth0/auth0-angular';
-import {Observable} from "rxjs";
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-addproduct',
@@ -18,15 +18,16 @@ export class AddproductComponent implements OnInit {
   public selectedFile: File = null;
   public imageSrc: string;
   url = GlobalConstants.apiURL + 'product/add';
+  serviceUrl = GlobalConstants.apiServiceServerURL;
   constructor(public auth: AuthService, private fb: FormBuilder, private http: HttpClient) {
   }
 
   ngOnInit(): void {
-    const header = document.querySelector('nav');
-    const sectionOne = document.querySelector('.wrapper');
-
-    header.classList.add('nav-noscroll');
-    header.classList.remove('.navigation');
+    // const header = document.querySelector('nav');
+    // const sectionOne = document.querySelector('.wrapper');
+    //
+    // header.classList.add('nav-noscroll');
+    // header.classList.remove('.navigation');
     this.myForm = this.fb.group({productImage: '', productName: '', productDescription: '', productPrice: ''});
     this.auth.getAccessTokenSilently().subscribe((profile) => {
       this.profileJson = JSON.parse(JSON.stringify(profile, null, 2));
@@ -35,7 +36,7 @@ export class AddproductComponent implements OnInit {
 
   public uploadImage(formData: FormData): Observable<any> {
     const file = formData.get('file') as File;
-    const url = this.url + `/upload?file=${file.name}`;
+    const url = this.serviceUrl + `/upload?file=${file.name}`;
     this.postData = {
       clientToken: this.profileJson,
       product: {
@@ -45,9 +46,14 @@ export class AddproductComponent implements OnInit {
         askingPrice: this.myForm.getRawValue().productPrice
       }
     };
-    console.log(this.postData);
-    this.http.post(this.url, this.postData).toPromise().then(data => {console.log(data); });
-    return this.http.post(url, formData , {responseType: 'text'});
+    // console.log(this.postData);
+    this.http.post(this.url, this.postData).toPromise().then(data => {
+      console.log(data);
+      return this.http.post(url, formData , {responseType: 'text'});
+    }).catch(data => {
+      return data;
+    });
+    return null;
   }
 
   onSelectFile(event): void {
@@ -62,18 +68,18 @@ export class AddproductComponent implements OnInit {
       }
     );
   }
-
-  addProduct(): void {
-    this.postData = {
-      clientToken: this.profileJson,
-      product: {
-      image: this.myForm.value.productImage,
-      title: this.myForm.getRawValue().productName,
-      description: this.myForm.getRawValue().productDescription,
-      askingPrice: this.myForm.getRawValue().productPrice
-      }
-    };
-    console.log(this.postData);
-    this.http.post(this.url, this.postData).toPromise().then(data => {console.log(data); });
-  }
+  //
+  // addProduct(): void {
+  //   this.postData = {
+  //     clientToken: this.profileJson,
+  //     product: {
+  //     image: this.myForm.value.productImage,
+  //     title: this.myForm.getRawValue().productName,
+  //     description: this.myForm.getRawValue().productDescription,
+  //     askingPrice: this.myForm.getRawValue().productPrice
+  //     }
+  //   };
+  //   console.log(this.postData);
+  //   this.http.post(this.url, this.postData).toPromise().then(data => {console.log(data); });
+  // }
 }

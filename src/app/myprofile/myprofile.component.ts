@@ -32,13 +32,11 @@ export class MyprofileComponent implements OnInit {
   // @ts-ignore
   myForm: any;
   ngOnInit(): void {
-    const header = document.querySelector('button');
+    // const header = document.querySelector('button');
+    // header.classList.add('menu-btn-black');
     this.myForm = this.fb.group({address: '', phoneNumber: '', paymentMethod: ''});
-    header.classList.add('menu-btn-black');
-
     this.http.get(this.url, {responseType: 'json'}).subscribe(responseData => {
       this.itemList = responseData;
-
       this.auth.user$.subscribe((profile) => {
         this.profileJson = JSON.parse(JSON.stringify(profile, null, 2));
         this.createContent(this.http, this.urlDelete);

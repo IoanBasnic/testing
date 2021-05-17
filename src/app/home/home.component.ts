@@ -38,23 +38,23 @@ export class HomeComponent implements OnInit {
     //   header.classList.add('nav-noscroll');
     //   // header.classList.remove('.navigation');
     // }
-    const sectionOneObserver = new IntersectionObserver(function(entries, sectionOneObserver) {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          header.classList.add('menu-btn-black');
-        }
-        else {
-          header.classList.remove('menu-btn-black');
-        }
-      });
-    }, sectionOneOptions);
-
-    sectionOneObserver.observe(sectionOne);
+    // const sectionOneObserver = new IntersectionObserver(function(entries, sectionOneObserver) {
+    //   entries.forEach(entry => {
+    //     if (entry.isIntersecting) {
+    //       header.classList.add('menu-btn-black');
+    //     }
+    //     else {
+    //       header.classList.remove('menu-btn-black');
+    //     }
+    //   });
+    // }, sectionOneOptions);
+    //
+    // sectionOneObserver.observe(sectionOne);
 
     if (this.auth != null) {
       this.auth.getAccessTokenSilently().subscribe((profile) => {
         this.profileJson = JSON.parse(JSON.stringify(profile, null, 2));
-        console.log(this.profileJson);
+        // console.log(this.profileJson);
         if (this.profileJson === null) {}
         else {
           this.http.post(this.url, this.profileJson).toPromise().then(data => {

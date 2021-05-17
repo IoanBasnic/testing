@@ -25,19 +25,19 @@ export class LoginComponent implements OnInit {
   profileJson;
 
   ngOnInit(): void {
-    const header = document.querySelector('button');
-    const sectionOne = document.querySelector('.wrapper');
+    // const header = document.querySelector('button');
+    // const sectionOne = document.querySelector('.wrapper');
+    //
+    // header.classList.add('menu-btn-black');
 
-    header.classList.add('menu-btn-black');
-
-    this.myForm = this.fb.group({username: '', password: ''});
-    this.myForm.valueChanges.subscribe(console.log);
+    // this.myForm = this.fb.group({username: '', password: ''});
+    // this.myForm.valueChanges.subscribe(console.log);
   }
-  loginClient(): void {
-    this.auth.user$.subscribe((profile) => {
-      this.profileJson = JSON.parse(JSON.stringify(profile, null, 2));
+  // loginClient(): void {
+  //   this.auth.user$.subscribe((profile) => {
+  //     this.profileJson = JSON.parse(JSON.stringify(profile, null, 2));
      // this.http.post(this.url, this.profileJson.sub).toPromise().then(data => {console.log(data); });
-    });
+    // });
     // this.postData = {
     //   username: this.myForm.getRawValue().username,
     //   email: this.myForm.getRawValue().email,
@@ -54,5 +54,5 @@ export class LoginComponent implements OnInit {
     //     alert('Error: ' + resp.status);
     //   }
     //  });
-  }
+  // }
 }
