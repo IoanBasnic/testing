@@ -28,7 +28,7 @@ export class AddproductComponent implements OnInit {
     //
     // header.classList.add('nav-noscroll');
     // header.classList.remove('.navigation');
-    this.myForm = this.fb.group({productImage: '', productName: '', productDescription: '', productPrice: ''});
+    this.myForm = this.fb.group({productImage: '', productName: '', productDescription: '', productCategory: '', productPrice: ''});
     this.auth.getAccessTokenSilently().subscribe((profile) => {
       this.profileJson = JSON.parse(JSON.stringify(profile, null, 2));
     });
@@ -43,10 +43,11 @@ export class AddproductComponent implements OnInit {
         image: file,
         title: this.myForm.getRawValue().productName,
         description: this.myForm.getRawValue().productDescription,
+        category: this.myForm.getRawValue().productCategory,
         askingPrice: this.myForm.getRawValue().productPrice
       }
     };
-    // console.log(this.postData);
+    console.log(this.postData);
     this.http.post(this.url, this.postData).toPromise().then(data => {
       console.log(data);
       return this.http.post(url, formData , {responseType: 'text'});
