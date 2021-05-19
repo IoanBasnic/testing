@@ -23,11 +23,7 @@
 <!--              </tr>-->
 <!--              </thead>-->
 <!--              <tbody>-->
-<!--              <tr *ngFor="let user of itemList | filter:searchText">-->
-<!--                <td>{{user.id}}</td>-->
-<!--                <td>{{user.name}}</td>-->
-<!--                <td>{{user.country}}</td>-->
-<!--              </tr>-->
+
 <!--              </tbody>-->
 <!--            </table>-->
       </div>
@@ -51,7 +47,17 @@
 
 <div class="bef-wrapper">
   <div class="wrapper">
-    <div class="main-container"> <div id="dynamicContent" class="grid-wrapper" ></div> </div>
+    <div class="main-container">
+      <div id="dynamicContent" class="grid-wrapper" >
+        <div class="productCard" *ngFor="let user of itemList | filter:searchText">
+          <img src="{{user.image}}"/>
+          <h1>{{user.title}}</h1>
+          <p>{{user.description}}</p>
+          <p>{{user.askingPrice}} in Lei</p>
+          <button class="buttonProduct" routerLink='/products/view/' (click)="onClickFunction(user.id)">For more info, click here!</button>
+        </div>
+    </div>
+    </div>
   </div>
 </div>
 

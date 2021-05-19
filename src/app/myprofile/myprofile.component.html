@@ -65,8 +65,13 @@
 
     <div class="container">
       <label></label>
-      <agm-map [latitude]="lat" [longitude]="lng" (mapClick)="selectLocation($event)">
-        <agm-marker [latitude]="lat" [longitude]="lng" ></agm-marker>
+      <agm-map [latitude]="newLat" [longitude]="newLng" (mapClick)="selectLocation($event)">
+        <agm-marker [latitude]="newLat" [longitude]="newLng" >
+          <agm-info-window>
+            <h3><strong>New location</strong></h3>
+            <p>Your new selected location</p>
+          </agm-info-window>
+        </agm-marker>
       </agm-map>
       <button class="btn" type="submit" (click)="editAddress()" routerLink="/profile">Edit address</button>
 

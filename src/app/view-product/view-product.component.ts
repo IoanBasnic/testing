@@ -38,6 +38,7 @@ export class ViewProductComponent implements OnInit {
       this.createContent();
       this.urlClient = GlobalConstants.apiURL + 'client/' + this.ProductID;
       this.http.get(this.urlClient, {responseType: 'json'}).subscribe(responseDataClient => {
+        console.log(responseDataClient);
         if (responseDataClient != null) {
           this.itemList = responseDataClient;
           this.client.name = this.itemList.name;

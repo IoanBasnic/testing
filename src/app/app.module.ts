@@ -1,4 +1,4 @@
-import { NgModule, Input } from '@angular/core';
+import {NgModule, Input, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import { HostListener } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
@@ -73,6 +73,7 @@ const routes: Routes = [
       clientId: 'TquPbjI56X4ztU0YYI0lmXNRfS16572g'
     }),
   ],
+  schemas:  [ CUSTOM_ELEMENTS_SCHEMA ],
   exports: [RouterModule],
   bootstrap: [AppComponent]
 })

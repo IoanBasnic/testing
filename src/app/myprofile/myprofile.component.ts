@@ -3,24 +3,25 @@ import { AuthService } from '@auth0/auth0-angular';
 import {AgmCoreModule} from '@agm/core';
 import {HttpClient} from '@angular/common/http';
 import {GlobalConstants} from '../../common/global-constants';
-import {FormBuilder} from "@angular/forms";
+import {FormBuilder} from '@angular/forms';
+// tslint:disable-next-line:import-blacklist
+import 'rxjs/Rx';
 @Component({
   selector: 'app-user-profile',
   templateUrl: './myprofile.component.html',
   styleUrls: ['./myprofile.component.css']
 })
 export class MyprofileComponent implements OnInit {
-  client = {
-    name: '<add name>',
-    email: ' <add email>',
-    address: '<add address>',
-    phoneNumber: '<add phone number>'
-  };
+  client;
   lat = 44.426164962;
   lng = 26.102332924;
+  newLat = 44.426164962;
+  newLng = 26.102332924;
+
 
   url = GlobalConstants.apiURL + 'product';
   urlDelete = GlobalConstants.apiURL + 'product/delete';
+  urlGetClient = GlobalConstants.apiURL + 'client';
   urlEditAddress = GlobalConstants.apiURL + 'client';
   urlEditPhoneNumber = GlobalConstants.apiURL + 'client';
   urlEditPayment = GlobalConstants.apiURL + 'client';
@@ -38,14 +39,17 @@ export class MyprofileComponent implements OnInit {
     this.http.get(this.url, {responseType: 'json'}).subscribe(responseData => {
       this.itemList = responseData;
       this.auth.user$.subscribe((profile) => {
-        this.profileJson = JSON.parse(JSON.stringify(profile, null, 2));
-        this.createContent(this.http, this.urlDelete);
+          this.profileJson = JSON.parse(JSON.stringify(profile, null, 2));
+          this.createContent(this.http, this.urlDelete);
+          this.getUserInfo();
       });
     });
   }
 
-  selectLocation($event): void {
-    console.log(event);
+  // tslint:disable-next-line:no-shadowed-variable
+  selectLocation(event): void {
+    this.newLat = event.coords.lat;
+    this.newLng = event.coords.lng;
   }
 
 
@@ -141,10 +145,20 @@ export class MyprofileComponent implements OnInit {
       this.formData = {
         clientToken: data,
         additionalInfo: {
-          address: this.myForm.getRawValue().address,
+          address: {lat: this.newLat, lng: this.newLng},
         }
       };
       this.http.put(this.urlEditAddress, this.formData).toPromise().then(datas => {console.log(datas); });
+    });
+  }
+
+  private getUserInfo(): void {
+    this.auth.getAccessTokenSilently().subscribe(data => {
+      this.http.get(this.urlGetClient + '/' + data, {responseType: 'json'}).subscribe(clientData => {
+        this.client = clientData;
+        console.log(this.urlGetClient + '/' + data);
+        console.log(this.client);
+      });
     });
   }
 }

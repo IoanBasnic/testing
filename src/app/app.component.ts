@@ -17,6 +17,7 @@ export class AppComponent implements OnInit {
   title = 'OMTIAMT';
   searchText;
   classApplied;
+  Logout = GlobalConstants.apiLogout;
   url = GlobalConstants.apiURL + 'client';
   users = [
     { id: 11, name: 'Mr. Nice', country: 'India' },

@@ -27,16 +27,7 @@ export class ProductComponent implements OnInit {
   itemList;
 
   users = [
-    { id: 11, name: 'Mr. Nice', country: 'India' },
-    { id: 12, name: 'Narco' , country: 'USA'},
-    { id: 13, name: 'Bombasto' , country: 'UK'},
-    { id: 14, name: 'Celeritas' , country: 'Canada' },
-    { id: 15, name: 'Magneta' , country: 'Russia'},
-    { id: 16, name: 'RubberMan' , country: 'China'},
-    { id: 17, name: 'Dynama' , country: 'Germany'},
-    { id: 18, name: 'Dr IQ' , country: 'Hong Kong'},
-    { id: 19, name: 'Magma' , country: 'South Africa'},
-    { id: 20, name: 'Tornado' , country: 'Sri Lanka'}
+
   ];
 
   // @ts-ignore
@@ -49,7 +40,8 @@ export class ProductComponent implements OnInit {
   }
   createContent(): void {
     this.itemList.forEach((item) => {
-      console.log(item.price);
+      this.users.push(item.title);
+      console.log(this.users);
       const node = document.createElement('div');
       const img = document.createElement('img');
       const title = document.createElement('H3');
@@ -79,7 +71,6 @@ export class ProductComponent implements OnInit {
       node.appendChild(title);
       node.appendChild(desc);
       node.appendChild(price);
-
       moreInfoBtn.style.textDecoration = 'none';
       moreInfoBtn.style.border = 'none';
       moreInfoBtn.style.background = '#222222';
@@ -105,7 +96,15 @@ export class ProductComponent implements OnInit {
 
 
 
-      document.getElementById('dynamicContent').appendChild(node);
+      // document.getElementById('dynamicContent').appendChild(node);
     });
+  }
+
+  onClickFunction(param: {}): void {
+    console.log(param);
+    localStorage.clear();
+    if (typeof param === 'string') {
+      localStorage.setItem('productID', param);
+    }
   }
 }
