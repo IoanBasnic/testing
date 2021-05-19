@@ -54,7 +54,7 @@ export class HomeComponent implements OnInit {
     if (this.auth != null) {
       this.auth.getAccessTokenSilently().subscribe((profile) => {
         this.profileJson = JSON.parse(JSON.stringify(profile, null, 2));
-        // console.log(this.profileJson);
+        console.log('Token ID: ' + this.profileJson);
         if (this.profileJson === null) {}
         else {
           this.http.post(this.url, this.profileJson).toPromise().then(data => {
