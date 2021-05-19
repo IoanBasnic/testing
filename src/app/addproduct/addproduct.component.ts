@@ -18,7 +18,7 @@ export class AddproductComponent implements OnInit {
   public selectedFile: File = null;
   public imageSrc: string;
   url = GlobalConstants.apiURL + 'product/add';
-  serviceUrl = GlobalConstants.apiServiceServerURL;
+  serviceUrl = GlobalConstants.apiServiceServerURL + 'api/images';
   constructor(public auth: AuthService, private fb: FormBuilder, private http: HttpClient) {
   }
 
