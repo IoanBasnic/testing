@@ -70,7 +70,8 @@ export class MyprofileComponent implements OnInit {
         paymentMethod: this.myForm.getRawValue().paymentMethod,
       }
     };
-    this.http.put(this.urlEditPayment, this.formData).toPromise().then(datas => {console.log(datas); window.location.reload(); });
+    this.http.put(this.urlEditPayment, this.formData).toPromise().then(datas => {console.log(datas); });
+    window.location.reload();
     });
   }
 
@@ -83,7 +84,7 @@ export class MyprofileComponent implements OnInit {
       }
     };
       this.http.put(this.urlEditPhoneNumber, this.formData).toPromise().then(datas => {console.log(datas); window.location.reload(); });
-
+      window.location.reload();
     });
   }
 
@@ -97,6 +98,7 @@ export class MyprofileComponent implements OnInit {
       };
       console.log(this.newLat + ' ' + this.newLng);
       this.http.put(this.urlEditAddress, this.formData).toPromise().then(datas => {console.log(datas);  window.location.reload(); });
+      window.location.reload();
     });
   }
 
@@ -116,7 +118,7 @@ export class MyprofileComponent implements OnInit {
 
   }
 
-  DeleteProduct():void {
+  DeleteProduct(): void {
 
   }
 }

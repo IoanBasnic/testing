@@ -55,8 +55,7 @@ export class AddproductComponent implements OnInit {
     }).catch(data => {
       return data;
     });
-    this.router.navigate(['/addproduct']);
-    return null;
+    return this.http.post(url, formData , {responseType: 'text'});;
   }
 
   onSelectFile(event): void {
@@ -70,6 +69,7 @@ export class AddproductComponent implements OnInit {
         this.imageSrc = res;
       }
     );
+    this.router.navigate(['/products']);
   }
   //
   // addProduct(): void {
