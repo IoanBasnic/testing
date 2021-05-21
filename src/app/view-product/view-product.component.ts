@@ -36,7 +36,8 @@ export class ViewProductComponent implements OnInit {
     this.http.get(this.url, {responseType: 'json'}).subscribe(responseData => {
       this.itemList = responseData;
       this.createContent();
-      this.urlClient = GlobalConstants.apiURL + 'client/' + this.ProductID;
+      this.urlClient = GlobalConstants.apiURL + 'product/client/' + this.ProductID;
+      console.log(this.urlClient);
       this.http.get(this.urlClient, {responseType: 'json'}).subscribe(responseDataClient => {
         console.log(responseDataClient);
         if (responseDataClient != null) {

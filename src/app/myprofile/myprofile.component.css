@@ -167,3 +167,121 @@ button:hover {
   color: #ffffff;
   transition: all 0.3s ease 0s;
 }
+/* */
+form{
+  padding: 10px 30px 50px 30px;
+}
+form .field{
+  height: 50px;
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 40px;
+  position: relative;
+}
+form .field input{
+  height: 100%;
+  width: 100%;
+  outline: none;
+  font-size: 17px;
+  padding-left: 20px;
+  border: 1px solid lightgrey;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+}
+form .field input:focus,
+form .field input:valid{
+  border-color: #4158d0;
+}
+form .field label{
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  color: #999999;
+  font-weight: 400;
+  font-size: 17px;
+  pointer-events: none;
+  transform: translateY(-50%);
+  transition: all 0.3s ease;
+}
+form .field input:focus ~ label,
+form .field input:valid ~ label{
+  top: 0%;
+  font-size: 16px;
+  color: #4158d0;
+  background: #fff;
+  transform: translateY(-50%);
+}
+form .content{
+  display: flex;
+  width: 100%;
+  height: 50px;
+  font-size: 16px;
+  align-items: center;
+  justify-content: space-around;
+}
+form .content .checkbox{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+form .content input{
+  width: 15px;
+  height: 15px;
+  background: red;
+}
+form .content label{
+  color: #262626;
+  user-select: none;
+  padding-left: 5px;
+}
+
+form .field input[type="submit"]{
+  color: #fff;
+  border: none;
+  padding-left: 0;
+  margin-top: -10px;
+  font-size: 20px;
+  font-weight: 500;
+  cursor: pointer;
+  background-image: linear-gradient(90deg,#f4633a,#c800a1,#0033a0);
+  transition: all 0.3s ease;
+}
+form .field input[type="submit"]:active{
+  transform: scale(0.95);
+}
+form .signup-up{
+  color: #262626;
+  margin-top: 20px;
+  text-align: center;
+}
+form .pass-link a,
+form .signup-link a{
+  color: #222222;
+  text-decoration: none;
+}
+
+.productCard {
+  height: 300px;
+  background: #f2f2f2;
+  color: #222222;
+  font-size: 20px;
+  list-style-type: none;
+  padding: 5rem 1rem;
+  text-align: center;
+  text-transform: capitalize;
+  font-weight: 300;
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+.buttonProduct {
+  text-decoration: none;
+  border: none;
+  background: #222222;
+  color: #f2f2f2;
+  font-weight: 100;
+  padding: 20px;
+  text-transform: uppercase;
+  border-radius: 6px;
+  display: inline-block;
+  cursor:pointer;
+}

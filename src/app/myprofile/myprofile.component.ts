@@ -12,6 +12,8 @@ import 'rxjs/Rx';
   styleUrls: ['./myprofile.component.css']
 })
 export class MyprofileComponent implements OnInit {
+  constructor(public auth: AuthService, private fb: FormBuilder, private http: HttpClient) {
+  }
   client;
   lat = 44.426164962;
   lng = 26.102332924;
@@ -27,91 +29,35 @@ export class MyprofileComponent implements OnInit {
   urlEditPayment = GlobalConstants.apiURL + 'client';
   itemList; formData = {};
   private profileJson: any;
-  constructor(public auth: AuthService, private fb: FormBuilder, private http: HttpClient) {
-  }
 
   // @ts-ignore
   myForm: any;
+  // tslint:disable-next-line:no-shadowed-variable
+  MyList = [];
   ngOnInit(): void {
     // const header = document.querySelector('button');
     // header.classList.add('menu-btn-black');
     this.myForm = this.fb.group({address: '', phoneNumber: '', paymentMethod: ''});
     this.http.get(this.url, {responseType: 'json'}).subscribe(responseData => {
       this.itemList = responseData;
-      this.auth.user$.subscribe((profile) => {
+      this.auth.user$.subscribe(async (profile) => {
           this.profileJson = JSON.parse(JSON.stringify(profile, null, 2));
-          this.createContent(this.http, this.urlDelete);
           this.getUserInfo();
+          this.createContent();
       });
     });
   }
-
-  // tslint:disable-next-line:no-shadowed-variable
   selectLocation(event): void {
     this.newLat = event.coords.lat;
     this.newLng = event.coords.lng;
   }
 
 
-  createContent(http, urlDelete): void {
+  createContent(): void {
     this.itemList.forEach((item) => {
-      if (item.clientId === this.profileJson.sub)
+      if (item.clientId === this.profileJson.sub && this.MyList.some(e => e.id === item.id) === false)
       {
-        const node = document.createElement('div');
-        const img = document.createElement('img');
-        const title = document.createElement('H3');
-        const desc = document.createElement('p');
-        const price = document.createElement('p');
-        const moreInfoBtn = document.createElement('a');
-        const textPrice = document.createTextNode('Price: ' + item.askingPrice + ' lei');
-        const textTitle = document.createTextNode('Title: ' + item.title);
-        const textDesc = document.createTextNode('Description: ' + item.description);
-        moreInfoBtn.append('Delete this product');
-        // tslint:disable-next-line:typedef
-        moreInfoBtn.onclick = function onClickFunction() {
-          console.log(item);
-          http.post(urlDelete, item.id).subscribe(responseData => {
-            console.log(responseData);
-          });
-        };
-        node.id = item.id;
-        node.className = 'grid' + ' ';
-        // @ts-ignore
-        title.appendChild(textTitle);
-        // @ts-ignore
-        desc.appendChild(textDesc);
-        price.appendChild(textPrice);
-        img.src = item.image;
-        node.appendChild(img);
-        node.appendChild(title);
-        node.appendChild(desc);
-        node.appendChild(price);
-
-        moreInfoBtn.style.textDecoration = 'none';
-        moreInfoBtn.style.border = 'none';
-        moreInfoBtn.style.background = '#222222';
-        moreInfoBtn.style.color = '#ffffff';
-        moreInfoBtn.style.fontWeight = '100';
-        moreInfoBtn.style.padding = '20px';
-        moreInfoBtn.style.textTransform = 'uppercase';
-        moreInfoBtn.style.borderRadius = '6px';
-        moreInfoBtn.style.display = 'inline-block';
-        moreInfoBtn.style.transition = 'all 0.3s ease 0s';
-
-        node.appendChild(moreInfoBtn);
-        node.style.height = '300px';
-        node.style.background = '#ffffff';
-        node.style.color = '#222222';
-        node.style.fontSize = '24px';
-        node.style.listStyleType = 'none';
-        node.style.padding = '5rem 1rem';
-        node.style.textAlign = 'center';
-        node.style.textTransform = 'capitalize';
-        node.style.fontWeight = '600';
-        node.style.boxShadow = '0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)';
-
-
-        document.getElementById('dynamicContent').appendChild(node);
+        this.MyList.push(item);
       }
     });
   }
@@ -124,7 +70,7 @@ export class MyprofileComponent implements OnInit {
         paymentMethod: this.myForm.getRawValue().paymentMethod,
       }
     };
-    this.http.put(this.urlEditPayment, this.formData).toPromise().then(datas => {console.log(datas); });
+    this.http.put(this.urlEditPayment, this.formData).toPromise().then(datas => {console.log(datas); window.location.reload(); });
     });
   }
 
@@ -136,7 +82,8 @@ export class MyprofileComponent implements OnInit {
         phone_number: this.myForm.getRawValue().phoneNumber,
       }
     };
-      this.http.put(this.urlEditPhoneNumber, this.formData).toPromise().then(datas => {console.log(datas); });
+      this.http.put(this.urlEditPhoneNumber, this.formData).toPromise().then(datas => {console.log(datas); window.location.reload(); });
+
     });
   }
 
@@ -148,7 +95,8 @@ export class MyprofileComponent implements OnInit {
           address: {lat: this.newLat, lng: this.newLng},
         }
       };
-      this.http.put(this.urlEditAddress, this.formData).toPromise().then(datas => {console.log(datas); });
+      console.log(this.newLat + ' ' + this.newLng);
+      this.http.put(this.urlEditAddress, this.formData).toPromise().then(datas => {console.log(datas);  window.location.reload(); });
     });
   }
 
@@ -156,9 +104,19 @@ export class MyprofileComponent implements OnInit {
     this.auth.getAccessTokenSilently().subscribe(data => {
       this.http.get(this.urlGetClient + '/' + data, {responseType: 'json'}).subscribe(clientData => {
         this.client = clientData;
-        console.log(this.urlGetClient + '/' + data);
-        console.log(this.client);
+        if (this.client.coodinates !== null) {
+          this.lat = this.client.coodinates.lat;
+          this.lng = this.client.coodinates.lng;
+        }
       });
     });
+  }
+
+  onClickFunction(id: any): void {
+
+  }
+
+  DeleteProduct():void {
+
   }
 }

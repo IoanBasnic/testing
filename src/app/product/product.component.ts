@@ -4,6 +4,7 @@ import {FormBuilder} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
 import {AppModule} from '../app.module';
 import { Injectable } from '@angular/core';
+import {OrderModule, OrderPipe} from 'ngx-order-pipe';
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
@@ -12,12 +13,15 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root',
 })
+
 export class ProductComponent implements OnInit {
   private product: GlobalConstants;
-  constructor(private fb: FormBuilder, private http: HttpClient, private products: GlobalConstants) {
+  constructor(private fb: FormBuilder, private http: HttpClient, private products: GlobalConstants, private orderPipe: OrderPipe) {
     this.http.get(this.url, {responseType: 'json'}).subscribe(responseData => {
       this.itemList = responseData;
       console.log(this.itemList);
+      this.sortedCollection = orderPipe.transform(this.itemList, 'user.title');
+      console.log(this.sortedCollection);
       this.product = this.products;
       this.createContent();
     });
@@ -25,11 +29,10 @@ export class ProductComponent implements OnInit {
 
   url = GlobalConstants.apiURL + 'product';
   itemList;
-
-  users = [
-
-  ];
-
+  order = 'info.name';
+  reverse = false;
+  users = [];
+  sortedCollection: any[];
   // @ts-ignore
   searchText: string;
 
@@ -37,6 +40,12 @@ export class ProductComponent implements OnInit {
     // const header = document.querySelector('button');
     // header.classList.add('menu-btn-black');
 
+  }
+  setOrder(value: string) {
+    if (this.order === value) {
+      this.reverse = !this.reverse;
+    }
+    this.order = value;
   }
   createContent(): void {
     this.itemList.forEach((item) => {

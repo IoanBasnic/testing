@@ -19,6 +19,7 @@ import {} from 'googlemaps';
 import { AuthModule } from '@auth0/auth0-angular';
 import { AddproductComponent } from './addproduct/addproduct.component';
 import { ViewProductComponent } from './view-product/view-product.component';
+import {OrderModule} from 'ngx-order-pipe';
 const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
@@ -61,6 +62,7 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     HttpClientModule,
+    OrderModule,
     Ng2SearchPipeModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBy1gdsv2P7YTNarViq_y6pahztakVY_3o'

@@ -4,6 +4,7 @@ import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from '@angular
 import {HttpClient} from '@angular/common/http';
 import {AuthService} from '@auth0/auth0-angular';
 import {Observable} from 'rxjs';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-addproduct',
@@ -19,7 +20,7 @@ export class AddproductComponent implements OnInit {
   public imageSrc: string;
   url = GlobalConstants.apiURL + 'product/add';
   serviceUrl = GlobalConstants.apiServiceServerURL + 'api/images';
-  constructor(public auth: AuthService, private fb: FormBuilder, private http: HttpClient) {
+  constructor(public auth: AuthService, private fb: FormBuilder, private http: HttpClient, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -54,6 +55,7 @@ export class AddproductComponent implements OnInit {
     }).catch(data => {
       return data;
     });
+    this.router.navigate(['/addproduct']);
     return null;
   }
 
