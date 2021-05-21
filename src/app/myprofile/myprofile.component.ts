@@ -12,6 +12,7 @@ import 'rxjs/Rx';
   styleUrls: ['./myprofile.component.css']
 })
 export class MyprofileComponent implements OnInit {
+  private StoreID: any;
   constructor(public auth: AuthService, private fb: FormBuilder, private http: HttpClient) {
   }
   client;
@@ -22,7 +23,7 @@ export class MyprofileComponent implements OnInit {
 
 
   url = GlobalConstants.apiURL + 'product';
-  urlDelete = GlobalConstants.apiURL + 'product/delete';
+  urlDelete = GlobalConstants.apiURL + 'product';
   urlGetClient = GlobalConstants.apiURL + 'client';
   urlEditAddress = GlobalConstants.apiURL + 'client';
   urlEditPhoneNumber = GlobalConstants.apiURL + 'client';
@@ -93,10 +94,9 @@ export class MyprofileComponent implements OnInit {
       this.formData = {
         clientToken: data,
         additionalInfo: {
-          address: {lat: this.newLat, lng: this.newLng},
+          coordinates: {lat: this.newLat, lng: this.newLng}
         }
       };
-      console.log(this.newLat + ' ' + this.newLng);
       this.http.put(this.urlEditAddress, this.formData).toPromise().then(datas => {console.log(datas);  window.location.reload(); });
       window.location.reload();
     });
@@ -115,10 +115,11 @@ export class MyprofileComponent implements OnInit {
   }
 
   onClickFunction(id: any): void {
-
+    this.StoreID = id;
   }
 
   DeleteProduct(): void {
-
+    this.http.delete(this.urlDelete, this.StoreID).toPromise().then(datas => {console.log(datas);   });
+    window.location.reload();
   }
 }

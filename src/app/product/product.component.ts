@@ -19,9 +19,7 @@ export class ProductComponent implements OnInit {
   constructor(private fb: FormBuilder, private http: HttpClient, private products: GlobalConstants, private orderPipe: OrderPipe) {
     this.http.get(this.url, {responseType: 'json'}).subscribe(responseData => {
       this.itemList = responseData;
-      console.log(this.itemList);
       this.sortedCollection = orderPipe.transform(this.itemList, 'user.title');
-      console.log(this.sortedCollection);
       this.product = this.products;
       this.createContent();
     });
@@ -29,7 +27,7 @@ export class ProductComponent implements OnInit {
 
   url = GlobalConstants.apiURL + 'product';
   itemList;
-  order = 'info.name';
+  order = 'user.title';
   reverse = false;
   users = [];
   sortedCollection: any[];
@@ -41,7 +39,7 @@ export class ProductComponent implements OnInit {
     // header.classList.add('menu-btn-black');
 
   }
-  setOrder(value: string) {
+  setOrder(value: string): void {
     if (this.order === value) {
       this.reverse = !this.reverse;
     }
@@ -50,7 +48,6 @@ export class ProductComponent implements OnInit {
   createContent(): void {
     this.itemList.forEach((item) => {
       this.users.push(item.title);
-      console.log(this.users);
       const node = document.createElement('div');
       const img = document.createElement('img');
       const title = document.createElement('H3');
@@ -64,7 +61,6 @@ export class ProductComponent implements OnInit {
       moreInfoBtn.href = '/products/view/';
       // tslint:disable-next-line:typedef
       moreInfoBtn.onclick = function onClickFunction() {
-        console.log(item);
         localStorage.clear();
         localStorage.setItem('productID', item.id);
       };
@@ -110,7 +106,6 @@ export class ProductComponent implements OnInit {
   }
 
   onClickFunction(param: {}): void {
-    console.log(param);
     localStorage.clear();
     if (typeof param === 'string') {
       localStorage.setItem('productID', param);
