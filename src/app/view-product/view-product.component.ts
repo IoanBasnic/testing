@@ -24,6 +24,7 @@ export class ViewProductComponent implements OnInit {
   };
   client = {
     name: '<add name>',
+    email: '<add email>',
     phoneNumber: ' <add phoneNumber>',
     paymentMethod: '<add paymentMethod>',
     lat: 44.426164962,
@@ -36,36 +37,28 @@ export class ViewProductComponent implements OnInit {
     this.http.get(this.url, {responseType: 'json'}).subscribe(responseData => {
       this.itemList = responseData;
       this.createContent();
-      this.urlClient = GlobalConstants.apiURL + 'product/client/' + this.ProductID;
+      this.urlClient = GlobalConstants.apiURL + 'product/client/?productid=' + this.ProductID;
       console.log(this.urlClient);
       this.http.get(this.urlClient, {responseType: 'json'}).subscribe(responseDataClient => {
         console.log(responseDataClient);
         if (responseDataClient != null) {
           this.itemList = responseDataClient;
-          this.client.name = this.itemList.name;
+          this.client.name = this.itemList.givenName + ' ' + this.itemList.familyName;
+          this.client.email = this.itemList.email;
           this.client.phoneNumber = this.itemList.phoneNumber;
           this.client.paymentMethod = this.itemList.paymentMethod;
           this.client.lat = this.itemList.lat;
           this.client.lng = this.itemList.lng;
-          if (this.CheckUser(this.itemList.email)) {
-            this.AddMsgButton();
-          } else {
-            this.PrintError();
-          }
+          this.auth.user$.subscribe(data => {
+            if (this.itemList.email !== data.email) {
+              this.AddMsgButton();
+            } else {
+              this.PrintError();
+            }
+          });
         }
       });
     });
-  }
-  CheckUser(emailUser): boolean {
-    this.auth.user$.subscribe((profile) => {
-      this.profileJson = JSON.parse(JSON.stringify(profile, null, 2));
-      if (this.profileJson === null) {}
-      else {
-        // tslint:disable-next-line:triple-equals
-        if (this.profileJson.email != emailUser) { return true; }
-      }
-    });
-    return false;
   }
   createContent(): void {
     this.itemList.forEach((item) => {
