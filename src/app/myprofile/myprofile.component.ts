@@ -103,13 +103,14 @@ export class MyprofileComponent implements OnInit {
       this.formData = {
         clientToken: data,
         additionalInfo: {
-          coordinates: {lat: this.newLat, lng: this.newLng}
+          coordinates: {latitude: this.newLat, longitude: this.newLng}
         }
       };
+      console.log(this.formData);
       this.http.put(this.urlEditAddress, this.formData).toPromise()
         .then(() => {alert('Edited address!'); })
-        .catch( () => {alert('Error when editing the address!'); })
-        .finally(() => {window.location.reload(); });
+        .catch( (abs) => {alert('Error when editing the address!'); console.log(abs); });
+      //  .finally(() => {window.location.reload(); });
     });
   }
 
@@ -134,6 +135,10 @@ export class MyprofileComponent implements OnInit {
               lng: getData.coordinates.longitude
             }
           };
+          this.lat = getData.coordinates.latitude;
+          this.lng = getData.coordinates.longitude;
+          this.newLat = getData.coordinates.latitude;
+          this.newLng = getData.coordinates.longitude;
         }
       });
     });
