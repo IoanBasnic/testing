@@ -29,29 +29,14 @@ const routes: Routes = [
   { path: 'addproduct', component: AddproductComponent },
   { path: 'products/view', component: ViewProductComponent },
   { path: '', component: HomeComponent },
-]; // sets up routes constant where you define your routes
+];
 
-// @NgModule({
-//   declarations: [
-//     AppComponent,
-//     HomeComponent,
-//     AboutComponent,
-//     LoginComponent,
-//     RegisterComponent
-//   ],
-//   imports: [
-//     BrowserModule,
-//     FormsModule,
-//     Ng2SearchPipeModule,
-//     //RouterModule.forRoot([{path : 'register', component: RegisterComponent}], {enableTracing: true})
-//   ],
-//   providers: [],
-//   bootstrap: [AppComponent]
-// })
+
 
 @NgModule({
   declarations: [
     AppComponent,
+    HomeComponent,
     RegisterComponent,
     LoginComponent,
     MyprofileComponent,

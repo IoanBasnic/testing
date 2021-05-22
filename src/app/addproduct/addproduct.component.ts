@@ -24,11 +24,6 @@ export class AddproductComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // const header = document.querySelector('nav');
-    // const sectionOne = document.querySelector('.wrapper');
-    //
-    // header.classList.add('nav-noscroll');
-    // header.classList.remove('.navigation');
     this.myForm = this.fb.group({productImage: '', productName: '', productDescription: '', productCategory: '', productPrice: ''});
     this.auth.getAccessTokenSilently().subscribe((profile) => {
       this.profileJson = JSON.parse(JSON.stringify(profile, null, 2));
@@ -48,14 +43,15 @@ export class AddproductComponent implements OnInit {
         askingPrice: this.myForm.getRawValue().productPrice
       }
     };
-    console.log(this.postData);
-    this.http.post(this.url, this.postData).toPromise().then(data => {
-      console.log(data);
-      return this.http.post(url, formData , {responseType: 'text'});
+    this.http.post(this.url, this.postData).toPromise()
+      .then(() => {
+        alert('Product was added!');
+        return this.http.post(url, formData , {responseType: 'text'});
     }).catch(data => {
+      alert('Error! Something happened when adding the product');
       return data;
     });
-    return this.http.post(url, formData , {responseType: 'text'});;
+    return null;
   }
 
   onSelectFile(event): void {
@@ -71,18 +67,4 @@ export class AddproductComponent implements OnInit {
     );
     this.router.navigate(['/products']);
   }
-  //
-  // addProduct(): void {
-  //   this.postData = {
-  //     clientToken: this.profileJson,
-  //     product: {
-  //     image: this.myForm.value.productImage,
-  //     title: this.myForm.getRawValue().productName,
-  //     description: this.myForm.getRawValue().productDescription,
-  //     askingPrice: this.myForm.getRawValue().productPrice
-  //     }
-  //   };
-  //   console.log(this.postData);
-  //   this.http.post(this.url, this.postData).toPromise().then(data => {console.log(data); });
-  // }
 }

@@ -58,7 +58,7 @@
 
 <div id="idAddress" class="modal">
 
-  <form [formGroup]="myForm" class="modal-content animate">
+  <form [formGroup]="myForm" (ngSubmit)="editAddress()" class="modal-content animate">
     <div class="imgcontainer">
       <span onclick="document.getElementById('idAddress').style.display='none'" class="close" title="Close Modal">&times;</span>
     </div>
@@ -73,7 +73,7 @@
           </agm-info-window>
         </agm-marker>
       </agm-map>
-      <button class="btn" type="submit" (click)="editAddress()" routerLink="/profile">Edit address</button>
+      <button class="btn" type="submit" routerLink="/profile">Edit address</button>
 
     </div>
 
@@ -93,7 +93,7 @@
       <input type="text" formControlName="phoneNumber" name="phoneNumber" required>
         <label ><b>New Phone Number:</b></label>
       </div>
-      <button class="btn" type="submit" (click)="editPhoneNumber()" routerLink="/profile">Edit Phone Number</button>
+      <button class="btn" type="submit" routerLink="/profile">Edit Phone Number</button>
 
     </div>
 
@@ -117,7 +117,7 @@
         <option value="CREDIT">CREDIT</option>
         <option value="DEBIT">DEBIT</option>
       </select>
-      <button class="btn" type="submit"  (click)="editPayment()" routerLink="/profile">Edit Payment method</button>
+      <button class="btn" type="submit" routerLink="/profile">Edit Payment method</button>
 
     </div>
 
@@ -155,7 +155,7 @@
 
 <div id="idDeleteProduct" class="modal">
 
-  <form [formGroup]="myForm" (ngSubmit)="editPayment()" class="modal-content animate">
+  <form [formGroup]="myForm"  class="modal-content animate">
     <div class="imgcontainer">
       <span onclick="document.getElementById('idDeleteProduct').style.display='none'" class="close" title="Close Modal">&times;</span>
     </div>

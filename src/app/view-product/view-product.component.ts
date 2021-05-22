@@ -13,6 +13,7 @@ import {AuthService} from '@auth0/auth0-angular';
 export class ViewProductComponent implements OnInit {
   ProductID: any;
   url = GlobalConstants.apiURL + 'product';
+  urlSendMessage = GlobalConstants.apiServiceServerURL + 'product/notif';
   urlClient;
   itemList;
   profileJson;
@@ -22,7 +23,7 @@ export class ViewProductComponent implements OnInit {
     description: ' <add desc>',
     price: '<add price>',
   };
-  client = {
+  seller = {
     name: '<add name>',
     email: '<add email>',
     phoneNumber: ' <add phoneNumber>',
@@ -30,7 +31,14 @@ export class ViewProductComponent implements OnInit {
     lat: 44.426164962,
     lng: 26.102332924,
   };
-  constructor(private fb: FormBuilder, private http: HttpClient, public auth: AuthService) { }
+  client = {
+    name: '<add name>',
+    email: '<add email>',
+  };
+  myForm: any;
+  constructor(private fb: FormBuilder, private http: HttpClient, public auth: AuthService) {
+    this.myForm = this.fb.group({myMessage: ''});
+  }
 
   ngOnInit(): void {
     this.ProductID = localStorage.getItem('productID');
@@ -38,18 +46,18 @@ export class ViewProductComponent implements OnInit {
       this.itemList = responseData;
       this.createContent();
       this.urlClient = GlobalConstants.apiURL + 'product/client/?productid=' + this.ProductID;
-      console.log(this.urlClient);
       this.http.get(this.urlClient, {responseType: 'json'}).subscribe(responseDataClient => {
-        console.log(responseDataClient);
         if (responseDataClient != null) {
           this.itemList = responseDataClient;
-          this.client.name = this.itemList.givenName + ' ' + this.itemList.familyName;
-          this.client.email = this.itemList.email;
-          this.client.phoneNumber = this.itemList.phoneNumber;
-          this.client.paymentMethod = this.itemList.paymentMethod;
-          this.client.lat = this.itemList.lat;
-          this.client.lng = this.itemList.lng;
+          this.seller.name = this.itemList.givenName + ' ' + this.itemList.familyName;
+          this.seller.email = this.itemList.email;
+          this.seller.phoneNumber = this.itemList.phoneNumber;
+          this.seller.paymentMethod = this.itemList.paymentMethod;
+          this.seller.lat = this.itemList.lat;
+          this.seller.lng = this.itemList.lng;
           this.auth.user$.subscribe(data => {
+            this.client.name = data.given_name + ' ' + data.family_name;
+            this.client.email = data.email;
             if (this.itemList.email !== data.email) {
               this.AddMsgButton();
             } else {
@@ -107,8 +115,26 @@ export class ViewProductComponent implements OnInit {
     node.style.fontWeight = '600';
     node.style.boxShadow = '0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)';
     // @ts-ignore
+    // tslint:disable-next-line:typedef
     btn.onclick = function onFunction() { document.getElementById('idSendMessage').style.display = 'block'};
     btn.append('Send a message');
     document.getElementById('msg').appendChild(node);
+  }
+
+  SendMessage(): void {
+    const toSend =  {
+      sellerName: this.seller.name,
+      toEmail: this.seller.email,
+      message: {
+        customerName: this.client.name,
+        name: this.product.title,
+        clientEmail: this.client.email,
+        details: this.myForm.getRawValue().myMessage
+      }
+    };
+    this.http.post(this.urlSendMessage, toSend).toPromise()
+      .then(() => {alert('Message sent!'); })
+      .catch(() => {alert('Error on sending the message!'); })
+      .finally(() => {window.location.reload(); });
   }
 }

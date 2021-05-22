@@ -294,3 +294,6 @@ img {
   }
 }
 
+.button_cont {
+  cursor: pointer;
+}

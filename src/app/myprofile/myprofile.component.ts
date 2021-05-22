@@ -15,9 +15,16 @@ export class MyprofileComponent implements OnInit {
   private StoreID: any;
   constructor(public auth: AuthService, private fb: FormBuilder, private http: HttpClient) {
   }
-  client;
   lat = 44.426164962;
   lng = 26.102332924;
+  client = {
+    phoneNumber: '<Add phone number>',
+    paymentMethod: '<Add payment Method>',
+    coordinates: {
+      lat: this.lat,
+      lng: this.lng
+    }
+  };
   newLat = 44.426164962;
   newLng = 26.102332924;
 
@@ -36,8 +43,6 @@ export class MyprofileComponent implements OnInit {
   // tslint:disable-next-line:no-shadowed-variable
   MyList = [];
   ngOnInit(): void {
-    // const header = document.querySelector('button');
-    // header.classList.add('menu-btn-black');
     this.myForm = this.fb.group({address: '', phoneNumber: '', paymentMethod: ''});
     this.http.get(this.url, {responseType: 'json'}).subscribe(responseData => {
       this.itemList = responseData;
@@ -71,8 +76,10 @@ export class MyprofileComponent implements OnInit {
         paymentMethod: this.myForm.getRawValue().paymentMethod,
       }
     };
-    this.http.put(this.urlEditPayment, this.formData).toPromise().then(datas => {console.log(datas); });
-    window.location.reload();
+    this.http.put(this.urlEditPayment, this.formData).toPromise()
+      .then(() => {alert('Edited payment method!'); })
+      .catch( () => {alert('Error when editing the payment method!'); })
+      .finally(() => {window.location.reload(); });
     });
   }
 
@@ -84,8 +91,10 @@ export class MyprofileComponent implements OnInit {
         phone_number: this.myForm.getRawValue().phoneNumber,
       }
     };
-      this.http.put(this.urlEditPhoneNumber, this.formData).toPromise().then(datas => {console.log(datas); window.location.reload(); });
-      window.location.reload();
+      this.http.put(this.urlEditPhoneNumber, this.formData).toPromise()
+        .then(() => {alert('Edited phone number!'); })
+        .catch( () => {alert('Error when editing the phone number!'); })
+        .finally(() => {window.location.reload(); });
     });
   }
 
@@ -97,18 +106,34 @@ export class MyprofileComponent implements OnInit {
           coordinates: {lat: this.newLat, lng: this.newLng}
         }
       };
-      this.http.put(this.urlEditAddress, this.formData).toPromise().then(datas => {console.log(datas);  window.location.reload(); });
-      window.location.reload();
+      this.http.put(this.urlEditAddress, this.formData).toPromise()
+        .then(() => {alert('Edited address!'); })
+        .catch( () => {alert('Error when editing the address!'); })
+        .finally(() => {window.location.reload(); });
     });
   }
 
   private getUserInfo(): void {
     this.auth.getAccessTokenSilently().subscribe(data => {
       this.http.get(this.urlGetClient + '/' + data, {responseType: 'json'}).subscribe(clientData => {
-        this.client = clientData;
-        if (this.client.coodinates !== null) {
-          this.lat = this.client.coodinates.lat;
-          this.lng = this.client.coodinates.lng;
+        const getData = JSON.parse(JSON.stringify(clientData, null, 2));
+        this.client = {
+          phoneNumber: getData.phoneNumber,
+          paymentMethod: getData.paymentMethod,
+          coordinates: {
+            lat: this.lat,
+            lng: this.lng
+          }
+        };
+        if (getData.coordinates !== null) {
+          this.client = {
+            phoneNumber: getData.phoneNumber,
+            paymentMethod: getData.paymentMethod,
+            coordinates: {
+              lat: getData.coordinates.latitude,
+              lng: getData.coordinates.longitude
+            }
+          };
         }
       });
     });
@@ -119,7 +144,9 @@ export class MyprofileComponent implements OnInit {
   }
 
   DeleteProduct(): void {
-    this.http.delete(this.urlDelete, this.StoreID).toPromise().then(datas => {console.log(datas);   });
-    window.location.reload();
+    this.http.delete(this.urlDelete, this.StoreID).toPromise()
+      .then(() => {alert('Product deleted!'); })
+      .catch( () => {alert('Error when deleting the product!'); })
+      .finally(() => {window.location.reload(); });
   }
 }
