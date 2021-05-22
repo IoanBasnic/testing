@@ -30,7 +30,7 @@ export class MyprofileComponent implements OnInit {
 
 
   url = GlobalConstants.apiURL + 'product';
-  urlDelete = GlobalConstants.apiURL + 'product';
+  urlDelete = GlobalConstants.apiURL + 'product?productid=';
   urlGetClient = GlobalConstants.apiURL + 'client';
   urlEditAddress = GlobalConstants.apiURL + 'client';
   urlEditPhoneNumber = GlobalConstants.apiURL + 'client';
@@ -149,7 +149,7 @@ export class MyprofileComponent implements OnInit {
   }
 
   DeleteProduct(): void {
-    this.http.delete(this.urlDelete, this.StoreID).toPromise()
+    this.http.delete(this.urlDelete + this.StoreID, this.StoreID).toPromise()
       .then(() => {alert('Product deleted!'); })
       .catch( () => {alert('Error when deleting the product!'); })
       .finally(() => {window.location.reload(); });
