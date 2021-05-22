@@ -109,7 +109,7 @@ export class MyprofileComponent implements OnInit {
       console.log(this.formData);
       this.http.put(this.urlEditAddress, this.formData).toPromise()
         .then(() => {alert('Edited address!'); })
-        .catch( (abs) => {alert('Error when editing the address!'); console.log(abs); })
+        .catch( () => {alert('Error when editing the address!'); })
         .finally(() => {window.location.reload(); });
     });
   }
