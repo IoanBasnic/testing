@@ -103,14 +103,14 @@ export class MyprofileComponent implements OnInit {
       this.formData = {
         clientToken: data,
         additionalInfo: {
-          coordinates: {latitude: this.newLat, longitude: this.newLng}
+          coordinates: {lat: this.newLat, lng: this.newLng}
         }
       };
       console.log(this.formData);
       this.http.put(this.urlEditAddress, this.formData).toPromise()
         .then(() => {alert('Edited address!'); })
-        .catch( (abs) => {alert('Error when editing the address!'); console.log(abs); });
-      //  .finally(() => {window.location.reload(); });
+        .catch( (abs) => {alert('Error when editing the address!'); console.log(abs); })
+        .finally(() => {window.location.reload(); });
     });
   }
 
