@@ -5,6 +5,7 @@ import {HttpClient} from '@angular/common/http';
 import {AppModule} from '../app.module';
 import { Injectable } from '@angular/core';
 import {OrderModule, OrderPipe} from 'ngx-order-pipe';
+import {AuthService} from '@auth0/auth0-angular';
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
@@ -16,11 +17,19 @@ import {OrderModule, OrderPipe} from 'ngx-order-pipe';
 
 export class ProductComponent implements OnInit {
   private product: GlobalConstants;
-  constructor(private fb: FormBuilder, private http: HttpClient, private products: GlobalConstants, private orderPipe: OrderPipe) {
-    this.http.get(this.url, {responseType: 'json'}).subscribe(responseData => {
-      this.itemList = responseData;
-      this.sortedCollection = orderPipe.transform(this.itemList, 'user.title');
-      this.product = this.products;
+  private profileJson: any;
+  constructor(public auth: AuthService,
+              private fb: FormBuilder,
+              private http: HttpClient,
+              private products: GlobalConstants,
+              private orderPipe: OrderPipe) {
+    this.auth.user$.subscribe(async (profile) => {
+      this.profileJson = JSON.parse(JSON.stringify(profile, null, 2));
+      this.http.get(this.url, {headers: {Authorization: this.profileJson}}).subscribe(responseData => {
+        this.itemList = responseData;
+        this.sortedCollection = orderPipe.transform(this.itemList, 'user.title');
+        this.product = this.products;
+      });
     });
   }
 

@@ -20,6 +20,7 @@ export class AddproductComponent implements OnInit {
   public imageSrc: string;
   url = GlobalConstants.apiURL + 'product/add';
   serviceUrl = GlobalConstants.apiServiceServerURL + 'api/images';
+  serviceUrlImg = GlobalConstants.apiServiceServerURL + 'image/checkProduct';
   constructor(public auth: AuthService, private fb: FormBuilder, private http: HttpClient, private router: Router) {
   }
 
@@ -43,10 +44,23 @@ export class AddproductComponent implements OnInit {
         askingPrice: this.myForm.getRawValue().productPrice
       }
     };
-    this.http.post(this.url, this.postData).toPromise()
-      .then(() => {
-        alert('Product was added!');
-        return this.http.post(url, formData , {responseType: 'text'});
+    this.http.post(this.url, this.postData, {headers: {Authorization: this.profileJson}}).toPromise()
+      .then((reponse) => {
+        const getID = JSON.parse(JSON.stringify(reponse, null, 2));
+       // alert('Product was added!');
+       // return this.http.post(url, formData, {responseType: 'text'});
+        const imgCheck = {
+          clientToken: this.profileJson,
+          productId: getID.id
+        };
+        console.log(imgCheck);
+        this.http.post(this.serviceUrlImg, imgCheck, {headers: {Authorization: this.profileJson}}).toPromise()
+          .then( () => {
+            alert('Product was added!');
+            return this.http.post(url, formData, {responseType: 'text'});
+          }).catch( () => {
+            alert('Error! Something happened when uploading the image');
+        });
     }).catch(data => {
       alert('Error! Something happened when adding the product');
       return data;

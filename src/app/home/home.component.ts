@@ -17,14 +17,14 @@ export class HomeComponent implements OnInit {
   private postData: {};
   constructor(@Inject(DOCUMENT) public document: Document, public auth: AuthService, private http: HttpClient, private router: Router) { }
 
+  // this.http.post(this.url, this.postData, {headers: {Authorization: this.profileJson}}).toPromise()
   ngOnInit(): void {
     if (this.auth != null) {
       this.auth.getAccessTokenSilently().subscribe((profile) => {
         this.profileJson = JSON.parse(JSON.stringify(profile, null, 2));
-        console.log('Token ID: ' + this.profileJson);
         if (this.profileJson === null) {}
         else {
-          this.http.post(this.url, this.profileJson).toPromise()
+          this.http.post(this.url, {Authorization: this.profileJson}).toPromise()
             .then(data => {console.log(data); })
             .catch(data => {console.log(data); });
         }

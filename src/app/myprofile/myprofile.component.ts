@@ -44,12 +44,13 @@ export class MyprofileComponent implements OnInit {
   MyList = [];
   ngOnInit(): void {
     this.myForm = this.fb.group({address: '', phoneNumber: '', paymentMethod: ''});
-    this.http.get(this.url, {responseType: 'json'}).subscribe(responseData => {
-      this.itemList = responseData;
-      this.auth.user$.subscribe(async (profile) => {
-          this.profileJson = JSON.parse(JSON.stringify(profile, null, 2));
-          this.getUserInfo();
-          this.createContent();
+    this.auth.user$.subscribe(async (profile) => {
+      this.profileJson = JSON.parse(JSON.stringify(profile, null, 2));
+      this.http.get(this.url, {headers: {Authorization: this.profileJson}}).subscribe(responseData => {
+        this.itemList = responseData;
+        this.profileJson = JSON.parse(JSON.stringify(profile, null, 2));
+        this.getUserInfo();
+        this.createContent();
       });
     });
   }
@@ -76,7 +77,7 @@ export class MyprofileComponent implements OnInit {
         paymentMethod: this.myForm.getRawValue().paymentMethod,
       }
     };
-    this.http.put(this.urlEditPayment, this.formData).toPromise()
+    this.http.put(this.urlEditPayment, this.formData, {headers: {Authorization: this.profileJson}}).toPromise()
       .then(() => {alert('Edited payment method!'); })
       .catch( () => {alert('Error when editing the payment method!'); })
       .finally(() => {window.location.reload(); });
@@ -91,7 +92,7 @@ export class MyprofileComponent implements OnInit {
         phone_number: this.myForm.getRawValue().phoneNumber,
       }
     };
-      this.http.put(this.urlEditPhoneNumber, this.formData).toPromise()
+      this.http.put(this.urlEditPhoneNumber, this.formData, {headers: {Authorization: this.profileJson}}).toPromise()
         .then(() => {alert('Edited phone number!'); })
         .catch( () => {alert('Error when editing the phone number!'); })
         .finally(() => {window.location.reload(); });
@@ -107,7 +108,7 @@ export class MyprofileComponent implements OnInit {
         }
       };
       console.log(this.formData);
-      this.http.put(this.urlEditAddress, this.formData).toPromise()
+      this.http.put(this.urlEditAddress, this.formData, {headers: {Authorization: this.profileJson}}).toPromise()
         .then(() => {alert('Edited address!'); })
         .catch( () => {alert('Error when editing the address!'); })
         .finally(() => {window.location.reload(); });
@@ -116,7 +117,7 @@ export class MyprofileComponent implements OnInit {
 
   private getUserInfo(): void {
     this.auth.getAccessTokenSilently().subscribe(data => {
-      this.http.get(this.urlGetClient + '/' + data, {responseType: 'json'}).subscribe(clientData => {
+      this.http.get(this.urlGetClient + '/' + data, {headers: {Authorization: this.profileJson}}).subscribe(clientData => {
         const getData = JSON.parse(JSON.stringify(clientData, null, 2));
         this.client = {
           phoneNumber: getData.phoneNumber,
@@ -149,7 +150,7 @@ export class MyprofileComponent implements OnInit {
   }
 
   DeleteProduct(): void {
-    this.http.delete(this.urlDelete + this.StoreID, this.StoreID).toPromise()
+    this.http.delete(this.urlDelete + this.StoreID, {headers: {Authorization: this.profileJson}}).toPromise()
       .then(() => {alert('Product deleted!'); })
       .catch( () => {alert('Error when deleting the product!'); })
       .finally(() => {window.location.reload(); });
