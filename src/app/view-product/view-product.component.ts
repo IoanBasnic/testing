@@ -53,8 +53,8 @@ export class ViewProductComponent implements OnInit {
           this.seller.email = this.itemList.email;
           this.seller.phoneNumber = this.itemList.phoneNumber;
           this.seller.paymentMethod = this.itemList.paymentMethod;
-          this.seller.lat = this.itemList.lat;
-          this.seller.lng = this.itemList.lng;
+          this.seller.lat = this.itemList.coordinates.latitude;
+          this.seller.lng = this.itemList.coordinates.longitude;
           this.auth.user$.subscribe(data => {
             this.client.name = data.given_name + ' ' + data.family_name;
             this.client.email = data.email;
@@ -116,7 +116,7 @@ export class ViewProductComponent implements OnInit {
     node.style.boxShadow = '0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)';
     // @ts-ignore
     // tslint:disable-next-line:typedef
-    btn.onclick = function onFunction() { document.getElementById('idSendMessage').style.display = 'block'};
+    btn.onclick = function onFunction() { document.getElementById('idSendMessage').style.display = 'block'; };
     btn.append('Send a message');
     document.getElementById('msg').appendChild(node);
   }
