@@ -42,11 +42,13 @@ export class ViewProductComponent implements OnInit {
 
   ngOnInit(): void {
     this.ProductID = localStorage.getItem('productID');
-    this.http.get(this.url, {responseType: 'json'}).subscribe(responseData => {
+    this.auth.user$.subscribe(data => {
+      this.profileJson = JSON.parse(JSON.stringify(data, null, 2));
+      this.http.get(this.url, {headers: {Authorization: this.profileJson}}).subscribe(responseData => {
       this.itemList = responseData;
       this.createContent();
       this.urlClient = GlobalConstants.apiURL + 'product/client/?productid=' + this.ProductID;
-      this.http.get(this.urlClient, {headers: {Authorization: this.profileJson}}).subscribe(responseDataClient => {
+      this.http.get(this.urlClient, {headers: {Authorization: this.profileJson}} ).subscribe(responseDataClient => {
         if (responseDataClient != null) {
           this.itemList = responseDataClient;
           this.seller.name = this.itemList.givenName + ' ' + this.itemList.familyName;
@@ -57,17 +59,17 @@ export class ViewProductComponent implements OnInit {
             this.seller.lat = this.itemList.coordinates.latitude;
             this.seller.lng = this.itemList.coordinates.longitude;
           }
-          this.auth.user$.subscribe(data => {
-            this.client.name = data.given_name + ' ' + data.family_name;
-            this.client.email = data.email;
-            if (this.itemList.email !== data.email) {
+         // this.auth.user$.subscribe(data => {
+          this.client.name = data.given_name + ' ' + data.family_name;
+          this.client.email = data.email;
+          if (this.itemList.email !== data.email) {
               this.AddMsgButton();
             } else {
               this.PrintError();
             }
-          });
         }
       });
+    });
     });
   }
   createContent(): void {
