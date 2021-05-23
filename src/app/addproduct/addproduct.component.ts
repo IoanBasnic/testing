@@ -19,7 +19,7 @@ export class AddproductComponent implements OnInit {
   public selectedFile: File = null;
   public imageSrc: string;
   url = GlobalConstants.apiURL + 'product/add';
-  serviceUrl = GlobalConstants.apiServiceServerURL + 'api/images';
+  serviceUrl = GlobalConstants.apiServiceServerURL + 'image';
   serviceUrlImg = GlobalConstants.apiServiceServerURL + 'image/checkProduct';
   constructor(public auth: AuthService, private fb: FormBuilder, private http: HttpClient, private router: Router) {
   }
@@ -33,7 +33,7 @@ export class AddproductComponent implements OnInit {
 
   public uploadImage(formData: FormData): Observable<any> {
     const file = formData.get('file') as File;
-    const url = this.serviceUrl + `/upload?file=${file.name}`;
+    const url = this.serviceUrl + `/uploadFile?file=${file.name}`;
     this.postData = {
       clientToken: this.profileJson,
       product: {
@@ -57,7 +57,11 @@ export class AddproductComponent implements OnInit {
         this.http.post(this.serviceUrlImg, imgCheck, {headers: {Authorization: this.profileJson}}).toPromise()
           .then( () => {
             alert('Product was added!');
-            return this.http.post(url, formData, {responseType: 'text'});
+            const imageForm = new FormData();
+            imageForm.append('file', this.selectedFile);
+            this.http.post(url, imageForm).toPromise().then(a => {console.log(a); })
+              .catch(a => {console.log(a); });
+            return null;
           }).catch( () => {
             alert('Error! Something happened when uploading the image');
         });
@@ -68,11 +72,16 @@ export class AddproductComponent implements OnInit {
     return null;
   }
 
+
   onSelectFile(event): void {
-    this.selectedFile = event.target.files[event.target.files.length - 1] as File;
+     this.selectedFile = event.target.files[event.target.files.length - 1] as File;
+     console.log(this.selectedFile);
   }
 
   performUpload(): void {
+    this.formData = new FormData();
+    // this.formData.append('file', this.myForm.get('profile').value);
+    // console.log(this.formData);
     this.formData.set('file', this.selectedFile, this.selectedFile.name);
     this.uploadImage(this.formData).subscribe(
       res => {

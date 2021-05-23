@@ -4,9 +4,9 @@
 
     <div class="row">
       <div class="column">
-        <form [formGroup]="myForm" method="post" enctype="multipart/form-data">
+        <form [formGroup]="myForm" (ngSubmit)="performUpload()" method="post" enctype="multipart/form-data">
               <div class="field">
-                <input type="file" formControlName="productImage" accept='.jpg' (change)="onSelectFile($event)" required>
+                <input type="file"  name="profile" (change)="onSelectFile($event)" required>
                 <label>Product image</label>
               </div>
           <div class="field">
@@ -41,7 +41,7 @@
             <label>Product price</label>
           </div>
           <div class="field">
-                  <input type="submit" value="Add product" (click)="performUpload()">
+                  <input type="submit" value="Add product">
           </div>
         </form>
         <div *ngIf="imageSrc">

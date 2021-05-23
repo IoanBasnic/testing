@@ -230,3 +230,8 @@ select::-ms-expand {
   /*top:50%;*/
   /*margin-top:-7px;*/
 }
+
+img {
+  max-height: 200px;
+  max-width: 200px;
+}
