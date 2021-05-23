@@ -241,3 +241,7 @@ form .signup-link a{
   color: #222222;
   text-decoration: none;
 }
+
+#msg {
+  cursor: pointer;
+}

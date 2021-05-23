@@ -156,3 +156,28 @@ form .signup-link a{
   transform: scaleX(1);
   transform-origin: bottom left;
 }
+
+select {
+  width:200px;
+  height:50px;
+  font-size:18px;
+  border:2px solid #aaa;
+  cursor:pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  outline:none;
+  padding:0 10px;
+}
+select::-ms-expand {
+  display:none;
+}
+.icon_arrow {
+  border-top:15px solid tomato;
+  border-left:10px solid transparent;
+  border-right:10px solid transparent;
+  position:relative;
+  right:35px;
+  top: 15px;
+  /*top:50%;*/
+  /*margin-top:-7px;*/
+}

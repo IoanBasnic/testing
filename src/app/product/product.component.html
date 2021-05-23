@@ -14,22 +14,11 @@
               <button type="reset" class="btn btn-reset fa fa-times"></button>
             </div>
           </div>
-<!--            <table class="table table-striped">-->
-<!--              <thead>-->
-<!--              <tr>-->
-<!--                <th>Id</th>-->
-<!--                <th>Hero Name</th>-->
-<!--                <th>Country</th>-->
-<!--              </tr>-->
-<!--              </thead>-->
-<!--              <tbody>-->
-
-<!--              </tbody>-->
-<!--            </table>-->
       </div>
       <div class="column" >
         <h2>Search by category</h2>
         <div>
+          <div id="wrap">
         <select id="selectbox2" name="search" [(ngModel)]="searchText" autocomplete="off">
           <option value="electronics">Electronics</option>
           <option value="books">Books</option>
@@ -43,6 +32,8 @@
           <option value="supermarket">Supermarket</option>
           <option value="other">Other</option>
         </select>
+            <span class="icon_arrow"></span>
+          </div>
       </div>
       </div>
       <div class="column" >

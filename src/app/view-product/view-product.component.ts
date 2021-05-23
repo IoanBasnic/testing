@@ -53,8 +53,10 @@ export class ViewProductComponent implements OnInit {
           this.seller.email = this.itemList.email;
           this.seller.phoneNumber = this.itemList.phoneNumber;
           this.seller.paymentMethod = this.itemList.paymentMethod;
-          this.seller.lat = this.itemList.coordinates.latitude;
-          this.seller.lng = this.itemList.coordinates.longitude;
+          if (this.itemList.coordinates != null) {
+            this.seller.lat = this.itemList.coordinates.latitude;
+            this.seller.lng = this.itemList.coordinates.longitude;
+          }
           this.auth.user$.subscribe(data => {
             this.client.name = data.given_name + ' ' + data.family_name;
             this.client.email = data.email;

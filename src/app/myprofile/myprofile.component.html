@@ -37,25 +37,6 @@
 
   </div>
 </div>
-
-<!--<div id="idAddress" class="modal">-->
-
-<!--  <form class="modal-content animate">-->
-<!--    <div class="imgcontainer">-->
-<!--      <span onclick="document.getElementById('idAddress').style.display='none'" class="close" title="Close Modal">&times;</span>-->
-<!--    </div>-->
-
-<!--    <div class="container">-->
-<!--      <label ><b>New Address:</b></label>-->
-<!--      <input type="text" placeholder="New address" name="uname" required>-->
-<!--      <button class="btn" type="submit">Edit address</button>-->
-
-<!--    </div>-->
-
-
-<!--  </form>-->
-<!--</div>-->
-
 <div id="idAddress" class="modal">
 
   <form [formGroup]="myForm" (ngSubmit)="editAddress()" class="modal-content animate">
@@ -110,6 +91,7 @@
 
     <div class="container">
       <label ><b>Choose a new payment method:</b></label>
+      <div id="wrap">
       <select id="selectbox2" formControlName="paymentMethod" name="paymentMethod">
         <option value="CASH">CASH</option>
         <option value="CHECK">CHECK</option>
@@ -117,6 +99,8 @@
         <option value="CREDIT">CREDIT</option>
         <option value="DEBIT">DEBIT</option>
       </select>
+       <span class="icon_arrow"></span>
+      </div>
       <button class="btn" type="submit" routerLink="/profile">Edit Payment method</button>
 
     </div>
