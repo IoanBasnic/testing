@@ -13,6 +13,7 @@ import 'rxjs/Rx';
 })
 export class MyprofileComponent implements OnInit {
   private StoreID: any;
+  private TokenClient: string;
   constructor(public auth: AuthService, private fb: FormBuilder, private http: HttpClient) {
   }
   lat = 44.426164962;
@@ -43,16 +44,23 @@ export class MyprofileComponent implements OnInit {
   // tslint:disable-next-line:no-shadowed-variable
   MyList = [];
   ngOnInit(): void {
-    this.myForm = this.fb.group({address: '', phoneNumber: '', paymentMethod: ''});
-    this.auth.user$.subscribe(async (profile) => {
-      this.profileJson = JSON.parse(JSON.stringify(profile, null, 2));
-      this.http.get(this.url, {headers: {Authorization: this.profileJson}}).subscribe(responseData => {
-        this.itemList = responseData;
-        this.profileJson = JSON.parse(JSON.stringify(profile, null, 2));
-        this.getUserInfo();
-        this.createContent();
-      });
+    this.auth.getAccessTokenSilently().subscribe(data => {
+      this.TokenClient = data;
     });
+    this.myForm = this.fb.group({address: '', phoneNumber: '', paymentMethod: ''});
+    this.auth.user$.subscribe( (profile) => {
+        this.profileJson = JSON.parse(JSON.stringify(profile, null, 2));
+        this.http.get(this.url, {headers: {Authorization: this.TokenClient}}).subscribe(responseData => {
+          this.itemList = responseData;
+          this.profileJson = JSON.parse(JSON.stringify(profile, null, 2));
+          console.log('token -- before getUserInfo: ' + this.TokenClient);
+          // this.getUserInfo();
+          this.createContent();
+        });
+        this.getUserInfo();
+        // this.createContent();
+      });
+
   }
   selectLocation(event): void {
     this.newLat = event.coords.lat;
@@ -70,55 +78,58 @@ export class MyprofileComponent implements OnInit {
   }
 
   editPayment(): void {
-    this.auth.getAccessTokenSilently().subscribe(data => {
+   // this.auth.getAccessTokenSilently().subscribe(data => {
     this.formData = {
-      clientToken: data,
+      clientToken: this.TokenClient,
       additionalInfo: {
         paymentMethod: this.myForm.getRawValue().paymentMethod,
       }
     };
-    this.http.put(this.urlEditPayment, this.formData, {headers: {Authorization: this.profileJson}}).toPromise()
+    console.log('token -- before payment: ' + this.TokenClient);
+    this.http.put(this.urlEditPayment, this.formData, {headers: {Authorization: this.TokenClient}}).toPromise()
       .then(() => {alert('Edited payment method!'); })
       .catch( () => {alert('Error when editing the payment method!'); })
       .finally(() => {window.location.reload(); });
-    });
+   // });
   }
 
   editPhoneNumber(): void {
-    this.auth.getAccessTokenSilently().subscribe(data => {
+   // this.auth.getAccessTokenSilently().subscribe(data => {
       this.formData = {
-        clientToken: data,
+        clientToken: this.TokenClient,
       additionalInfo: {
-        phone_number: this.myForm.getRawValue().phoneNumber,
+        phoneNumber: this.myForm.getRawValue().phoneNumber,
       }
     };
-      this.http.put(this.urlEditPhoneNumber, this.formData, {headers: {Authorization: this.profileJson}}).toPromise()
+      console.log(this.formData);
+      this.http.put(this.urlEditPhoneNumber, this.formData, {headers: {Authorization: this.TokenClient}}).toPromise()
         .then(() => {alert('Edited phone number!'); })
         .catch( () => {alert('Error when editing the phone number!'); })
         .finally(() => {window.location.reload(); });
-    });
+  //  });
   }
 
   editAddress(): void {
-    this.auth.getAccessTokenSilently().subscribe(data => {
+  //  this.auth.getAccessTokenSilently().subscribe(data => {
       this.formData = {
-        clientToken: data,
+        clientToken: this.TokenClient,
         additionalInfo: {
           coordinates: {lat: this.newLat, lng: this.newLng}
         }
       };
       console.log(this.formData);
-      this.http.put(this.urlEditAddress, this.formData, {headers: {Authorization: this.profileJson}}).toPromise()
+      this.http.put(this.urlEditAddress, this.formData, {headers: {Authorization: this.TokenClient}}).toPromise()
         .then(() => {alert('Edited address!'); })
         .catch( () => {alert('Error when editing the address!'); })
         .finally(() => {window.location.reload(); });
-    });
+    // });
   }
 
   private getUserInfo(): void {
-    this.auth.getAccessTokenSilently().subscribe(data => {
-      this.http.get(this.urlGetClient + '/' + data, {headers: {Authorization: this.profileJson}}).subscribe(clientData => {
+  //  this.auth.getAccessTokenSilently().subscribe(data => {
+      this.http.get(this.urlGetClient, {headers: {Authorization: this.TokenClient}}).subscribe(clientData => {
         const getData = JSON.parse(JSON.stringify(clientData, null, 2));
+        console.log(getData);
         this.client = {
           phoneNumber: getData.phoneNumber,
           paymentMethod: getData.paymentMethod,
@@ -142,7 +153,7 @@ export class MyprofileComponent implements OnInit {
           this.newLng = getData.coordinates.longitude;
         }
       });
-    });
+   // });
   }
 
   onClickFunction(id: any): void {
@@ -150,7 +161,7 @@ export class MyprofileComponent implements OnInit {
   }
 
   DeleteProduct(): void {
-    this.http.delete(this.urlDelete + this.StoreID, {headers: {Authorization: this.profileJson}}).toPromise()
+    this.http.delete(this.urlDelete + this.StoreID, {headers: {Authorization: this.TokenClient}}).toPromise()
       .then(() => {alert('Product deleted!'); })
       .catch( () => {alert('Error when deleting the product!'); })
       .finally(() => {window.location.reload(); });
