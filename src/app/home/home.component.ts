@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit {
         this.profileJson = JSON.parse(JSON.stringify(profile, null, 2));
         if (this.profileJson === null) {}
         else {
-          this.http.post(this.url, {Authorization: this.profileJson}).toPromise()
+          this.http.post(this.url, 'smth' , {headers: {Authorization: this.profileJson}}).toPromise()
             .then(data => {console.log(data); })
             .catch(data => {console.log(data); });
         }
