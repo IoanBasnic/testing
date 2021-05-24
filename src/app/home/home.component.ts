@@ -24,6 +24,7 @@ export class HomeComponent implements OnInit {
         this.profileJson = JSON.parse(JSON.stringify(profile, null, 2));
         if (this.profileJson === null) {}
         else {
+          GlobalConstants.clientTokenID = this.profileJson;
           this.http.post(this.url, 'smth' , {headers: {Authorization: this.profileJson}}).toPromise()
             .then(data => {console.log(data); })
             .catch(data => {console.log(data); });

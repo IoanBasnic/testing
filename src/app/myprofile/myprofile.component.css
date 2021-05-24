@@ -261,7 +261,7 @@ form .signup-link a{
 }
 
 .productCard {
-  height: 300px;
+  height: inherit;
   background: #f2f2f2;
   color: #222222;
   font-size: 20px;
@@ -317,3 +317,11 @@ select::-ms-expand {
   /*top:50%;*/
   /*margin-top:-7px;*/
 }
+
+.imgClass {
+  max-width: 200px;
+  max-height: 200px;
+}
+
+
+

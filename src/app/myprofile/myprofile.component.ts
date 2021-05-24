@@ -14,31 +14,22 @@ import 'rxjs/Rx';
 export class MyprofileComponent implements OnInit {
   private StoreID: any;
   private TokenClient: string;
+  private profileJson: any;
   constructor(public auth: AuthService, private fb: FormBuilder, private http: HttpClient) {
   }
   lat = 44.426164962;
   lng = 26.102332924;
+  newLat = 44.426164962;
+  newLng = 26.102332924;
   client = {
     phoneNumber: '<Add phone number>',
     paymentMethod: '<Add payment Method>',
-    coordinates: {
-      lat: this.lat,
-      lng: this.lng
-    }
+    coordinates: { lat: this.lat, lng: this.lng }
   };
-  newLat = 44.426164962;
-  newLng = 26.102332924;
-
-
   url = GlobalConstants.apiURL + 'product';
   urlDelete = GlobalConstants.apiURL + 'product?productid=';
-  urlGetClient = GlobalConstants.apiURL + 'client';
-  urlEditAddress = GlobalConstants.apiURL + 'client';
-  urlEditPhoneNumber = GlobalConstants.apiURL + 'client';
-  urlEditPayment = GlobalConstants.apiURL + 'client';
+  urlClient = GlobalConstants.apiURL + 'client';
   itemList; formData = {};
-  private profileJson: any;
-
   // @ts-ignore
   myForm: any;
   // tslint:disable-next-line:no-shadowed-variable
@@ -54,11 +45,9 @@ export class MyprofileComponent implements OnInit {
           this.itemList = responseData;
           this.profileJson = JSON.parse(JSON.stringify(profile, null, 2));
           console.log('token -- before getUserInfo: ' + this.TokenClient);
-          // this.getUserInfo();
           this.createContent();
         });
         this.getUserInfo();
-        // this.createContent();
       });
 
   }
@@ -78,74 +67,55 @@ export class MyprofileComponent implements OnInit {
   }
 
   editPayment(): void {
-   // this.auth.getAccessTokenSilently().subscribe(data => {
     this.formData = {
       clientToken: this.TokenClient,
       additionalInfo: {
         paymentMethod: this.myForm.getRawValue().paymentMethod,
       }
     };
-    console.log('token -- before payment: ' + this.TokenClient);
-    this.http.put(this.urlEditPayment, this.formData, {headers: {Authorization: this.TokenClient}}).toPromise()
+    this.http.put(this.urlClient, this.formData, {headers: {Authorization: this.TokenClient}}).toPromise()
       .then(() => {alert('Edited payment method!'); })
       .catch( () => {alert('Error when editing the payment method!'); })
       .finally(() => {window.location.reload(); });
-   // });
   }
 
   editPhoneNumber(): void {
-   // this.auth.getAccessTokenSilently().subscribe(data => {
       this.formData = {
         clientToken: this.TokenClient,
       additionalInfo: {
         phoneNumber: this.myForm.getRawValue().phoneNumber,
       }
     };
-      console.log(this.formData);
-      this.http.put(this.urlEditPhoneNumber, this.formData, {headers: {Authorization: this.TokenClient}}).toPromise()
+      this.http.put(this.urlClient, this.formData, {headers: {Authorization: this.TokenClient}}).toPromise()
         .then(() => {alert('Edited phone number!'); })
         .catch( () => {alert('Error when editing the phone number!'); })
         .finally(() => {window.location.reload(); });
-  //  });
   }
 
   editAddress(): void {
-  //  this.auth.getAccessTokenSilently().subscribe(data => {
       this.formData = {
         clientToken: this.TokenClient,
         additionalInfo: {
           coordinates: {lat: this.newLat, lng: this.newLng}
         }
       };
-      console.log(this.formData);
-      this.http.put(this.urlEditAddress, this.formData, {headers: {Authorization: this.TokenClient}}).toPromise()
+      this.http.put(this.urlClient, this.formData, {headers: {Authorization: this.TokenClient}}).toPromise()
         .then(() => {alert('Edited address!'); })
         .catch( () => {alert('Error when editing the address!'); })
         .finally(() => {window.location.reload(); });
-    // });
   }
 
   private getUserInfo(): void {
-  //  this.auth.getAccessTokenSilently().subscribe(data => {
-      this.http.get(this.urlGetClient, {headers: {Authorization: this.TokenClient}}).subscribe(clientData => {
+      this.http.get(this.urlClient, {headers: {Authorization: this.TokenClient}}).subscribe(clientData => {
         const getData = JSON.parse(JSON.stringify(clientData, null, 2));
-        console.log(getData);
-        this.client = {
-          phoneNumber: getData.phoneNumber,
-          paymentMethod: getData.paymentMethod,
-          coordinates: {
-            lat: this.lat,
-            lng: this.lng
-          }
+        this.client = { phoneNumber: getData.phoneNumber, paymentMethod: getData.paymentMethod,
+          coordinates: {  lat: this.lat, lng: this.lng }
         };
         if (getData.coordinates !== null) {
           this.client = {
             phoneNumber: getData.phoneNumber,
             paymentMethod: getData.paymentMethod,
-            coordinates: {
-              lat: getData.coordinates.latitude,
-              lng: getData.coordinates.longitude
-            }
+            coordinates: { lat: getData.coordinates.latitude, lng: getData.coordinates.longitude }
           };
           this.lat = getData.coordinates.latitude;
           this.lng = getData.coordinates.longitude;
@@ -153,7 +123,6 @@ export class MyprofileComponent implements OnInit {
           this.newLng = getData.coordinates.longitude;
         }
       });
-   // });
   }
 
   onClickFunction(id: any): void {

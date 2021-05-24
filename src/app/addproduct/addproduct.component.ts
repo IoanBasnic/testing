@@ -31,7 +31,7 @@ export class AddproductComponent implements OnInit {
     });
   }
 
-  public uploadImage(formData: FormData): Observable<any> {
+  public uploadImage(formData: FormData): void {
     const file = formData.get('file') as File;
     const url = this.serviceUrl + `/uploadFile?file=${file.name}`;
     this.postData = {
@@ -47,29 +47,23 @@ export class AddproductComponent implements OnInit {
     this.http.post(this.url, this.postData, {headers: {Authorization: this.profileJson}}).toPromise()
       .then((reponse) => {
         const getID = JSON.parse(JSON.stringify(reponse, null, 2));
-       // alert('Product was added!');
-       // return this.http.post(url, formData, {responseType: 'text'});
         const imgCheck = {
           clientToken: this.profileJson,
           productId: getID.id
         };
-        console.log(imgCheck);
         this.http.post(this.serviceUrlImg, imgCheck, {headers: {Authorization: this.profileJson}}).toPromise()
           .then( () => {
             alert('Product was added!');
             const imageForm = new FormData();
             imageForm.append('file', this.selectedFile);
-            this.http.post(url, imageForm).toPromise().then(a => {console.log(a); })
-              .catch(a => {console.log(a); });
-            return null;
+            this.http.post(url, imageForm).toPromise().then(a => {alert('Product was added!'); console.log(a); })
+              .catch(a => { alert('Error! Something happened when uploading the image'); console.log(a); });
           }).catch( () => {
-            alert('Error! Something happened when uploading the image');
+            alert('Error! Something happened when sending some information');
         });
     }).catch(data => {
       alert('Error! Something happened when adding the product');
-      return data;
     });
-    return null;
   }
 
 
@@ -80,14 +74,9 @@ export class AddproductComponent implements OnInit {
 
   performUpload(): void {
     this.formData = new FormData();
-    // this.formData.append('file', this.myForm.get('profile').value);
-    // console.log(this.formData);
     this.formData.set('file', this.selectedFile, this.selectedFile.name);
-    this.uploadImage(this.formData).subscribe(
-      res => {
-        this.imageSrc = res;
-      }
-    );
-    this.router.navigate(['/products']);
+    this.uploadImage(this.formData);
   }
 }
+
+

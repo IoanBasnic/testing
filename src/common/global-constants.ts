@@ -11,6 +11,7 @@ export class GlobalConstants {
   public static apiLogout = 'https://omtiamt-heroku.herokuapp.com/';
   //  public static apiURL = 'http://localhost:8080/';
   // public static apiLogout = 'http://localhost:4200/';
+  public static clientTokenID;
   public productID = '';
   // tslint:disable-next-line:typedef
   getPublicID() {return this.productID; }
