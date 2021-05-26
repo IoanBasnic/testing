@@ -18,6 +18,7 @@
   <nav class="navigation__nav">
     <ul class="navigation__list">
       <ng-container *ngIf="auth.isAuthenticated$ | async; else loggedOut">
+        <li class="navigation__item"><a class="navigation__link" href="/">Home</a></li>
         <li class="navigation__item"><a class="navigation__link" href="/addproduct">Add a product</a></li>
         <li class="navigation__item"><a class="navigation__link" href="/products">Market</a></li>
         <li class="navigation__item"> <a class="navigation__link" href="/profile">My profile</a></li>
