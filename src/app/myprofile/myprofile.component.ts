@@ -76,7 +76,7 @@ export class MyprofileComponent implements OnInit {
     this.http.put(this.urlClient, this.formData, {headers: {Authorization: this.TokenClient}}).toPromise()
       .then(() => {alert('Edited payment method!'); })
       .catch( () => {alert('Error when editing the payment method!'); })
-      .finally(() => {window.location.reload(); });
+      .finally(() => {this.getUserInfo(); });
   }
 
   editPhoneNumber(): void {
@@ -89,7 +89,7 @@ export class MyprofileComponent implements OnInit {
       this.http.put(this.urlClient, this.formData, {headers: {Authorization: this.TokenClient}}).toPromise()
         .then(() => {alert('Edited phone number!'); })
         .catch( () => {alert('Error when editing the phone number!'); })
-        .finally(() => {window.location.reload(); });
+        .finally(() => {this.getUserInfo(); });
   }
 
   editAddress(): void {
@@ -102,7 +102,7 @@ export class MyprofileComponent implements OnInit {
       this.http.put(this.urlClient, this.formData, {headers: {Authorization: this.TokenClient}}).toPromise()
         .then(() => {alert('Edited address!'); })
         .catch( () => {alert('Error when editing the address!'); })
-        .finally(() => {window.location.reload(); });
+        .finally(() => {this.getUserInfo(); });
   }
 
   private getUserInfo(): void {
