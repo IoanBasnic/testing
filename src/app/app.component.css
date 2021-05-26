@@ -232,7 +232,7 @@ body {
   width: 6rem;
   height: 6rem;
   border-radius: 50%;
-  background-image: radial-gradient(#0d324d, #7f5a83);
+  background-image: radial-gradient(#3400A1, #F40096);
   z-index: 10;
   transition: transform 0.8s cubic-bezier(0.86, 0, 0.07, 1);
 }
@@ -341,7 +341,7 @@ body {
 }
 
 
-@media screen and (max-width: 900px){
+@media screen and (max-width: 1000px){
 
   .navigation__button {
     position: fixed;
