@@ -73,6 +73,7 @@ export class MyprofileComponent implements OnInit {
         paymentMethod: this.myForm.getRawValue().paymentMethod,
       }
     };
+    console.log('editpayment: ' + this.formData );
     this.http.put(this.urlClient, this.formData, {headers: {Authorization: this.TokenClient}}).toPromise()
       .then(() => {alert('Edited payment method!'); })
       .catch( () => {alert('Error when editing the payment method!'); })
@@ -86,6 +87,7 @@ export class MyprofileComponent implements OnInit {
         phoneNumber: this.myForm.getRawValue().phoneNumber,
       }
     };
+    console.log('editphone: ' + this.formData );
       this.http.put(this.urlClient, this.formData, {headers: {Authorization: this.TokenClient}}).toPromise()
         .then(() => {alert('Edited phone number!'); })
         .catch( () => {alert('Error when editing the phone number!'); })
@@ -99,6 +101,7 @@ export class MyprofileComponent implements OnInit {
           coordinates: {lat: this.newLat, lng: this.newLng}
         }
       };
+    console.log('editAddress: ' + this.formData );
       this.http.put(this.urlClient, this.formData, {headers: {Authorization: this.TokenClient}}).toPromise()
         .then(() => {alert('Edited address!'); })
         .catch( () => {alert('Error when editing the address!'); })
