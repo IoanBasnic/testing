@@ -53,7 +53,6 @@ export class AddproductComponent implements OnInit {
         };
         this.http.post(this.serviceUrlImg, imgCheck, {headers: {Authorization: this.profileJson}}).toPromise()
           .then( () => {
-            alert('Product was added!');
             const imageForm = new FormData();
             imageForm.append('file', this.selectedFile);
             this.http.post(url, imageForm).toPromise().then(a => {alert('Product was added!'); console.log(a); })
