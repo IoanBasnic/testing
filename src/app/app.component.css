@@ -214,10 +214,10 @@ body {
 }
 .navigation__button {
   position: fixed;
-  top: 6rem;
-  right: 6rem;
-  width: 7rem;
-  height: 7rem;
+  top: 3rem;
+  right: 3rem;
+  width: 5rem;
+  height: 5rem;
   border-radius: 50%;
   background-color: #fff;
   box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.2);
@@ -227,10 +227,10 @@ body {
 }
 .navigation__background {
   position: fixed;
-  top: 6.5rem;
-  right: 6.5rem;
-  width: 6rem;
-  height: 6rem;
+  top: 3.25rem;
+  right: 3.25rem;
+  width: 3rem;
+  height: 3rem;
   border-radius: 50%;
   background-image: radial-gradient(#3400A1, #F40096);
   z-index: 10;
