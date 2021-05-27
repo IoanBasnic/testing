@@ -227,10 +227,10 @@ body {
 }
 .navigation__background {
   position: fixed;
-  top: 3.25rem;
-  right: 3.25rem;
-  width: 3rem;
-  height: 3rem;
+  top: 3.5rem;
+  right: 3.5rem;
+  width: 2.7rem;
+  height: 2.7rem;
   border-radius: 50%;
   background-image: radial-gradient(#3400A1, #F40096);
   z-index: 10;
